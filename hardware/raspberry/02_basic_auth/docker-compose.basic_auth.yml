@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+    influxdb:
+        image: arm32v7/influxdb:latest
+        container_name: influxdb
+        env_file: basic_auth.env
+        ports:
+            - '8086:8086'
+        volumes: 
+            - influxdb_data:/var/lib/influxdb
+        networks: 
+            - "iotstack"
+
+    mosquitto:
+        image: eclipse-mosquitto:1.6
+        container_name: mosquitto
+        volumes: 
+            - ./mosquitto/config/:/mosquitto/config/
+            - ./mosquitto/log:/mosquitto/log
+            - ./mosquitto/data:/mosquitto/data
+        user: "${USER_ID}:${GRP_ID}"
+        ports:
+            - '1883:1883'
+            - '1884:1884'
+        expose:
+            - 1883
+            - 1884
+        links: 
+            - telegraf
+        restart: always
+        networks: 
+            - "iotstack"
+    
+    telegraf:
+        image: telegraf:1.16
+        container_name: telegraf
+        links: 
+            - influxdb
+        env_file: basic_auth.env
+        ports:
+            - '8125:8125'
+        volumes: 
+            - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
+        networks: 
+            - "iotstack"
+    
+    grafana:
+        image: grafana/grafana:7.1.0
+        container_name: grafana
+        env_file: basic_auth.env
+        user: "472"
+        ports:
+            - '3000:3000'
+        links: 
+            - influxdb
+        volumes: 
+            - grafana_data:/var/lib/grafana
+        networks: 
+            - "iotstack"
+
+volumes: 
+    influxdb_data:
+    grafana_data:
+
+networks: 
+    iotstack:
+        external: true

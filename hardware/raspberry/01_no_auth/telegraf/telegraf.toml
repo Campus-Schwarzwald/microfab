@@ -1,0 +1,43 @@
+[agent]
+    interval = "20s"
+    round_interval = true
+    metric_batch_size = 1000
+    metric_buffer_limit = 10000
+    collection_jitter = "0s"
+    flush_interval = "10s"
+    flush_jitter = "0s"
+    precision = ""
+    debug = true
+    quiet = false
+    hostname = ""
+    omit_hostname = true
+
+#############################################################
+#                   OUTPUT PLUGINS                          #
+#############################################################
+[[outputs.influxdb]]
+    urls = [ "http://influxdb:8086" ]
+
+    database = "${INFLUXDB_DB}"
+
+    skip_database_creation = false
+
+    timeout = "5s"
+
+##################################################################
+#                   INPUT PLUGINS                                #
+##################################################################
+
+[[inputs.mqtt_consumer]]
+
+    servers = [ "tcp://mosquitto:1883" ]
+
+    # Topics to subscribe to:
+    topics = [
+        "test/#"
+    ]
+
+    # Connection timeout
+    connection_timeout = "30s"
+
+    data_format = "json"

@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+    influxdb:
+        image: arm32v7/influxdb:latest
+        container_name: influxdb
+        env_file: no_auth.env
+        ports:
+            - '8086:8086'
+        restart: unless-stopped
+        volumes: 
+            - influxdb_data:/var/lib/influxdb
+        networks: 
+            - "iotstack"
+
+    mosquitto:
+        image: eclipse-mosquitto:latest
+        container_name: mosquitto
+        volumes: 
+            - ./mosquitto/config/:/mosquitto/config/
+            - ./mosquitto/log:/mosquitto/log
+            - ./mosquitto/data:/mosquitto/data
+        user: "${USER_ID}:${GRP_ID}"
+        ports:
+            - '1883:1883'
+            - '1884:1884'
+        links: 
+            - telegraf
+        restart: unless-stopped
+        networks: 
+            - "iotstack"
+    
+    telegraf:
+        image: telegraf:latest
+        container_name: telegraf
+        links: 
+            - influxdb
+        depends_on:
+            - influxdb
+        env_file: no_auth.env
+        ports:
+            - '8125:8125'
+        restart: unless-stopped
+        volumes: 
+            - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
+        networks: 
+            - "iotstack"
+    
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        env_file: no_auth.env
+        ports:
+            - '3000:3000'
+        restart: unless-stopped
+        user: "472"
+        links: 
+            - influxdb
+        volumes: 
+            - grafana_data:/var/lib/grafana
+        networks: 
+            - "iotstack"
+
+    opcua:
+        image: ghcr.io/umati/sample-server:main
+        ports:
+            - "4840:4840"
+        restart: unless-stopped
+        networks:
+            - "iotstack"
+
+volumes: 
+    influxdb_data:
+    grafana_data:
+
+networks: 
+    iotstack:
+        external: true
