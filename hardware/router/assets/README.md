@@ -1,0 +1,1 @@
+After scanning the QR Code, the WiFi connection will be automatically set in your phone. For other purpose type user:password or connect via ethernet
