@@ -93,6 +93,28 @@ Stash all local changes on the Raspberry
 
     git stash push --include-untracked
 
+# Console
+
+## Useful commands
+
+Hash the wifi password
+
+    echo -n MySecretPassword | iconv -t utf16le | openssl md4
+
+    (stdin)= f38de32ad5224f05be73c6f542266937
+
+Copy and paste the password:
+
+    network={
+            ssid="example"
+            key_mgmt=WPA-EAP
+            eap=PEAP
+            identity="user@example.com"
+            password=hash:f38de32ad5224f05be73c6f542266937
+            ca_cert="/etc/cert/ca.pem"
+            phase1="peaplabel=1"
+            phase2="auth=MSCHAPV2"
+    }
 # Docker
 
 ## Useful commands

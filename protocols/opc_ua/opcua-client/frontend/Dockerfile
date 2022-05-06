@@ -1,14 +1,12 @@
-# base-image for python on any machine using a template variable,
-# see more about dockerfile templates here: https://www.balena.io/docs/learn/develop/dockerfile/
-FROM python:3.9-slim-bullseye
-
-# use apt-get if you need to install dependencies,
-# for instance if you need ALSA sound utils, just uncomment the lines below.
-# RUN apt-get update && apt-get install -yq \
-#    alsa-utils libasound2-dev && \
-#    apt-get clean && rm -rf /var/lib/apt/lists/*
+FROM python:3.8
 
 RUN apt-get update && apt-get install -yq stress wget
+
+RUN apt install libxml2 -y
+RUN apt-get install libxslt-dev -y
+RUN apt-get install python-dev -y
+RUN apt-get install gcc -y
+RUN apt-get install zlib1g-dev
 
 # Set our working directory
 WORKDIR /usr/src/app
