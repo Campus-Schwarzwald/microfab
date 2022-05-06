@@ -116,6 +116,7 @@ static void opcua_task(void *arg)
 
     /* Add Information Model Objects Here */
     // addLEDMethod(server);
+    addCurrentHallDataSourceVariable(server);
     addCurrentTemperatureDataSourceVariable(server);
     addRelay0ControlNode(server);
     addRelay1ControlNode(server);
