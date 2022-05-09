@@ -97,7 +97,7 @@ readCurrentHall(UA_Server *server,
                 const UA_NodeId *nodeId, void *nodeContext,
                 UA_Boolean sourceTimeStamp, const UA_NumericRange *range,
                 UA_DataValue *dataValue) {
-    UA_Float hall = hallRead();
+    UA_Float hall = 4.20;
     UA_Variant_setScalarCopy(&dataValue->value, &hall,
                              &UA_TYPES[UA_TYPES_FLOAT]);
     dataValue->hasValue = true;

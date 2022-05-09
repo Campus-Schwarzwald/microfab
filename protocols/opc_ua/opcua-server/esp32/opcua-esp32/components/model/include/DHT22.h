@@ -21,6 +21,5 @@ float 	getHumidity();
 float 	getTemperature();
 int 	getSignalLevel( int usTimeOut, bool state );
 float   ReadTemperature(int);
-float 	hallRead();
 
 #endif
