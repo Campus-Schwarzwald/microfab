@@ -98,6 +98,7 @@ readCurrentHall(UA_Server *server,
                 UA_Boolean sourceTimeStamp, const UA_NumericRange *range,
                 UA_DataValue *dataValue) {
     UA_Float hall = 4.20;
+    printf("%f", hall);
     UA_Variant_setScalarCopy(&dataValue->value, &hall,
                              &UA_TYPES[UA_TYPES_FLOAT]);
     dataValue->hasValue = true;
