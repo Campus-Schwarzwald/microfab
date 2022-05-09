@@ -2,6 +2,8 @@
 #include "model.h"
 #include "DHT22.h"
 #include "driver/gpio.h"
+#include <stdlib.h>
+
 
 static void
 configureGPIO();
@@ -97,7 +99,7 @@ readCurrentHall(UA_Server *server,
                 const UA_NodeId *nodeId, void *nodeContext,
                 UA_Boolean sourceTimeStamp, const UA_NumericRange *range,
                 UA_DataValue *dataValue) {
-    UA_Float hall = 4.20;
+    UA_Int16 hall = rand(0,420);
     printf("%f", hall);
     UA_Variant_setScalarCopy(&dataValue->value, &hall,
                              &UA_TYPES[UA_TYPES_FLOAT]);
