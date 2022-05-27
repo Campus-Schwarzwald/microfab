@@ -59,6 +59,13 @@ services:
         networks: 
             - "iotstack"
 
+    opc-client:
+        build: ./frontend
+        privileged: true
+        restart: always
+        ports:
+            - "8000:8000"
+
 volumes: 
     influxdb_data:
     grafana_data:

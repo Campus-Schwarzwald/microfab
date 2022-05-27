@@ -43,3 +43,10 @@ Microfab_006:t5A5ypfB
 Microfab_007:S7spEd4P
 
 Microfab_008:p9BpZ2VR
+
+## Router Default
+
+TP-Link_E544:73332565
+TP-Link_D002:25848854
+TP-Link_DB26:29317219
+TP-Link_E51C:79657976
