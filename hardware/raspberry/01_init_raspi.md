@@ -1,45 +1,20 @@
 This document explains step by step the initial setup and configuration of the RaspberryPi
 
 
-- Install Raspberry Pi OS Lite
-    - goto boot device
-        - add new file: ssh
-    - insert SD card in raspberry -> Power up
-        - login: ssh pi@raspberrypi.local
-        - pw: raspberry
-    - Unblock WiFi from rfkill (Check with rfkill list)
-        ``` bash
-        rfkill unblock 0
-        ```
-    - Change Hostname
-        ``` bash
-        sudo raspi-config
-        ```
-        - Hostname -> MikrofabControl -> OK
-        ``` bash
-        sudo reboot
-        ```
-    - Login via ssh
-        ``` bash
-        ssh pi@MikrofabControl.local
-        ```
+- Install Raspberry Pi OS Lite with Raspberry Pi Imager
+    - Hostname: MikrofabControl001 ... MikrofabControl006
+    - Activate SSH
+    - Set User: pi
+    - Set password: mikrofoo123
+    - Set WiFi network:
+      - SSID: Mikrofab_001 ...Mikrofab_006
+      - PIN:
+- Login via ssh
+    ``` bash
+    ssh pi@MikrofabControl_001.local
+    ```
       
 - Configure WiFi:
-    - Open config file:
-        ```bash
-        sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-        ```
-    - Add following lines:
-        ```bash
-        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-        update_config=1
-        country=DE
-      
-        network={
-            ssid="Mikrofab_01"
-            psk="WLAN-PASSWORD"
-        }
-        ```
     - Add static IP
         - Open config file
             ``` bash
@@ -69,6 +44,10 @@ This document explains step by step the initial setup and configuration of the R
 - Install Git
     ``` bash
     sudo apt install git
+    ```
+- Clone the Repo
+    ``` bash
+    git clone https://github.com/Campus-Schwarzwald/microfab.git
     ```
 - Install Docker
     ```bash
