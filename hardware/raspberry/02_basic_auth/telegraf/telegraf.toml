@@ -18,7 +18,7 @@
 
 [[outputs.influxdb_v2]]
 
-    urls = [ "http://192.168.88.100:8086" ]
+    urls = [ "http://influxdb:8086" ]
     token = "${INFLUX_TOKEN}"
     organization = "${DOCKER_INFLUXDB_INIT_ORG}"
     bucket = "${DOCKER_INFLUXDB_INIT_BUCKET}"
