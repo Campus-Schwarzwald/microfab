@@ -24,8 +24,6 @@
     bucket = "${DOCKER_INFLUXDB_INIT_BUCKET}"
 
     timeout = "5s"
-    username = "${DOCKER_INFLUXDB_INIT_USERNAME}"
-    password = "${DOCKER_INFLUXDB_INIT_PASSWORD}"
 
 ##################################################################
 #                   INPUT PLUGINS                                #
