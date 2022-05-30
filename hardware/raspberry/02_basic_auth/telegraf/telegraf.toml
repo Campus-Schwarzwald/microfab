@@ -15,12 +15,13 @@
 #############################################################
 #                   OUTPUT PLUGINS                          #
 #############################################################
-[[outputs.influxdb]]
+
+[[outputs.influxdb_v2]]
+
     urls = [ "http://influxdb:8086" ]
 
-    database = "${INFLUXDB_DB}"
-
-    skip_database_creation = false
+    organization = "Campus Schwarzwald"
+    bucket = "${INFLUXDB_DB}"
 
     timeout = "5s"
     username = "${INFLUXDB_USER}"
