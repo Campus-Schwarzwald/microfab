@@ -44,7 +44,7 @@
     username = "${TG_MOSQUITTO_USERNAME}"
     password = "${TG_MOSQUITTO_PASSWORD}"
 
-    data_format = "json"
+    data_format = "influx"
 
 [[inputs.ping]]
   # urls to ping
