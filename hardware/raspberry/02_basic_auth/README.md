@@ -49,12 +49,13 @@ However, recent events show that the sole use of user:password carries high risk
 
 ##  Ports
 
-| Component   | Port  |
-| ----------  | ----- |
-| `influxdb`  | 8086 (internal)  |
-| `telegraf`  | n/a (internal)  |
-| `grafana`   | 3000 (internal) |
-| `mosquitto` | 1883 (mqtt), 1884 (ws) (internal) |
+| Component    | Port                              |
+|--------------|-----------------------------------|
+| `influxdb`   | 8086 (internal)                   |
+| `telegraf`   | n/a (internal)                    |
+| `grafana`    | 3000 (internal)                   |
+| `mosquitto`  | 1883 (mqtt), 1884 (ws) (internal) |
+| `opc-client` | 8000                              |
 
 ## Component Level Security
 
