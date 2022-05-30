@@ -98,6 +98,8 @@ Telegraf will use the following environment variables to subscribe to Mosquitto 
 ### Grafana
 Grafana container will use the following environment variables to set up an admin account
 
+You can access grafana by the following URL: http://192.168.88.100:3000/grafana
+
     GF_ADMIN_USERNAME=admin
     GF_ADMIN_PASSWORD=mikrofoo123
 

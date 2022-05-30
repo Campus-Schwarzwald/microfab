@@ -2,7 +2,7 @@ version: "3"
 
 services:
     influxdb:
-        image: arm32v7/influxdb:latest
+        image: influxdb:latest
         container_name: influxdb
         env_file: basic_auth.env
         ports:

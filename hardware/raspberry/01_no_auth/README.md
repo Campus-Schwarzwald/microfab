@@ -8,7 +8,7 @@
 
 2. Bring the stack up:
 
-        USER_ID="$(id -u)" GRP_ID="$(id -g)" docker-compose -f docker-compose.no_auth.yml up -d
+        docker-compose -f docker-compose.no_auth.yml up
 
 3. All files which are needed to setup the ESP32 can be found [here](/esp/01_no_auth).
 
@@ -27,6 +27,8 @@
 
 ### Grafana
 Grafana container will use the following environment variables to set up an admin account
+
+You can access grafana by the following URL: http://192.168.88.100:3000/grafana
 
     GF_ADMIN_USERNAME=admin
     GF_ADMIN_PASSWORD=mikrofoo123
