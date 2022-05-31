@@ -5,15 +5,15 @@
 #include<ArduinoJson.h>
 
 #ifndef SECRET
-  const char ssid[] = "Mikrofab_01";
-  const char pass[] = "mikrofoo123";
+  const char ssid[] = "Microfab_01";
+  const char pass[] = "microfoo123";
 
   #define HOSTNAME "arduinoClient"
   IPAddress server(192, 168, 88, 100);
   const char *MQTT_HOST = "192.168.88.100";
   const int MQTT_PORT = 1883;
   const char *MQTT_USER = "pubclient"; // leave blank if no credentials used
-  const char *MQTT_PASS = "mikrofoo123"; // leave blank if no credentials used
+  const char *MQTT_PASS = "microfoo123"; // leave blank if no credentials used
 
 #endif
 

@@ -1,15 +1,15 @@
 
 - Install Raspberry Pi OS Lite with Raspberry Pi Imager
-    - Hostname: MikrofabControl001 ... MikrofabControl006
+    - Hostname: MicrofabControl001 ... MicrofabControl006
     - Activate SSH
     - Set User: pi
-    - Set password: mikrofoo123
+    - Set password: microfoo123
     - Set WiFi network:
-      - SSID: Mikrofab_001 ...Mikrofab_006
+      - SSID: Microfab_001 ...Microfab_006
       - PIN:
 - Login via ssh
     ``` bash
-    ssh pi@MikrofabControl_001.local
+    ssh pi@MicrofabControl_001.local
     ```
       
 - Configure WiFi:

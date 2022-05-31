@@ -5,7 +5,7 @@
 - DHCP: enabled from 200 ... 210
 - NAT: enabled
 - UPnP: disabled
-- ssid: Mikrofab_01 ... Microfab_04
+- ssid: Microfab_01 ... Microfab_04
 
 ## Router password
 

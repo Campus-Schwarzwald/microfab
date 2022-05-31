@@ -87,7 +87,7 @@ This requires subjects which has some hard-coded information in the script.
 
 ## Publishing with MQTT Clients
 
-You will require all devices or Apps that will publish data to the Mikrofab Broker to have the `ca.crt` on them along with the user `pubclient`. 
+You will require all devices or Apps that will publish data to the Microfab Broker to have the `ca.crt` on them along with the user `pubclient`. 
 The certificate will enable SSL/TLS and the authentication will only allow dedicated devices to publish data to the Broker.
 
 ### Typical MQTT Client Configuration
@@ -98,7 +98,7 @@ The certificate will enable SSL/TLS and the authentication will only allow dedic
 | Port | 8883         |
 | User | `pubclient`  |
 | TLS  | `v1.2`       |
-| Pass | `mikrofoo123`   |
+| Pass | `microfoo123`   |
 | cert | `ca.crt`, `mqtt-client.crt`, `mqtt-client.key`     |
 
 
@@ -140,7 +140,7 @@ def on_log(mqttc, obj, level, string):
 
 
 # Create Client with Websockets transport
-mqttc = mqtt.Client('mikrofab-selfsigned-ws', transport='websockets')
+mqttc = mqtt.Client('microfab-selfsigned-ws', transport='websockets')
 
 mqttc.tls_set(ca_certs=CA_CERT_FILE,certfile=CERT_FILE,keyfile=KEY_FILE,tls_version=ssl.PROTOCOL_TLSv1_2)
 mqttc.tls_insecure_set(True) # for Self-Signed Certificates
@@ -170,7 +170,7 @@ except KeyboardInterrupt as e:
 
 - Browser login to https://192.168.88.100:3000
 
-   - admin:mikrofoo123
+   - admin:microfoo123
    - Create Database  
       - Go to Configuration -> Data Sources
       - Add Data Source -> InfluxDB
@@ -180,7 +180,7 @@ except KeyboardInterrupt as e:
          - With credentials
          - Skip TLS Verify
       - In Basic Auth Details define
-         - admin:mikrofoo123
+         - admin:microfoo123
       - In InfluxDb details define
          - Database: edge
       - Safe & test

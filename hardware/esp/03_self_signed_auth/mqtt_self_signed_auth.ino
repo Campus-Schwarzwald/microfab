@@ -6,8 +6,8 @@
 #include<ArduinoJson.h>
 
 #ifndef SECRET
-  const char ssid[] = "Mikrofab_01";
-  const char pass[] = "mikrofoo123";
+  const char ssid[] = "Microfab_01";
+  const char pass[] = "microfoo123";
 
   #define HOSTNAME "192.168.88.100"
 

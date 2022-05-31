@@ -1,4 +1,4 @@
 ## Raspberry users
 
-Mikrofab_001: pi:mikrofoo123
-Mikrofab_002: pi:mikrofoo123
+Microfab_001: pi:microfoo123
+Microfab_002: pi:microfoo123

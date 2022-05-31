@@ -31,7 +31,7 @@ Grafana container will use the following environment variables to set up an admi
 You can access grafana by the following URL: http://192.168.88.100:3000/grafana
 
     GF_ADMIN_USERNAME=admin
-    GF_ADMIN_PASSWORD=mikrofoo123
+    GF_ADMIN_PASSWORD=microfoo123
 
 
 ## Mosquitto Websocket Client using Paho-MQTT-Python
@@ -43,7 +43,7 @@ import sys
 HOST = '192.168.88.100'
 PORT = 1884
 
-CLIENT_ID='mikrofab_client'
+CLIENT_ID='microfab_client'
 
 def on_connect(mqttc, obj, flags, rc):
     print("rc: "+str(rc))
