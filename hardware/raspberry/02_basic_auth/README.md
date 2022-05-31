@@ -20,11 +20,11 @@ However, recent events show that the sole use of user:password carries high risk
 2. Create and encrypt the passwords for Mosquitto broker:
 
    ``` bash
-   docker run -it --rm -v $(pwd)/mosquitto/config:/mosquitto/config eclipse-mosquitto mosquitto_passwd -H sha512 -b /mosquitto/config/passwd pubclient mikrofoo123  
+   docker run -it --rm -v $(pwd)/mosquitto/config:/mosquitto/config eclipse-mosquitto mosquitto_passwd -H sha512 -b /mosquitto/config/passwd pubclient microfoo123  
    ```
    
    ``` bash
-   docker run -it --rm -v $(pwd)/mosquitto/config:/mosquitto/config eclipse-mosquitto mosquitto_passwd -H sha512 -b /mosquitto/config/passwd subclient mikrofoo123  
+   docker run -it --rm -v $(pwd)/mosquitto/config:/mosquitto/config eclipse-mosquitto mosquitto_passwd -H sha512 -b /mosquitto/config/passwd subclient microfoo123  
    ```
 
 > There seems to be an issue with hashing with **sha512-pbkdf2**. Therefore we need to take **sha512**   
