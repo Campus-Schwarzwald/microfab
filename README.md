@@ -4,26 +4,25 @@ Microfab abstracts the data traffic of a production onto a board. With two ESP32
 
 ```mermaid
   classDiagram;
-      id1(MQTT Client 2)
-      id2(MQTT Client 2)
-      id3(MQTT Server & OPC UA Client)
-      id4(OPC UA Server)
-      
-      id1 --> id3
-      id2 --> id3
-      id4 --> id4
-      
-      id1: ESP32
-      id2: ESP32
-      id3: Raspberry Pi 4b
-      id4: Raspberry Pi 4b
-      
-      
-```
+      MicrofabControl -- WiFi_Router
+      MQTT_Client -- WiFi_Router
+      OPC_Server -- WiFi_Router
 
-```mermaid
-  erDiagram;
-      Grafana
+      class MicrofabControl{
+          Raspberry Pi
+          Docker
+      }
+      class WiFi_Router{
+          TP-Link
+          SSID: Microfab_00x
+      }
+      class MQTT_Client{
+          Espressif ESP32
+      }
+      class OPC_Server{
+          Raspberry Pi
+          Open62541 OPC Server      
+      }
       
       
 ```
