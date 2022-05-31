@@ -36,8 +36,6 @@ services:
         image: influxdb:latest
         container_name: influxdb
         env_file: basic_auth.env
-        ports:
-            - '8086:8086'
         volumes: 
             - influxdb2:/var/lib/influxdb2
         labels:
@@ -79,8 +77,6 @@ services:
         links: 
             - influxdb
         env_file: basic_auth.env
-        ports:
-            - '8125:8125'
         volumes: 
             - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
         labels:
@@ -93,8 +89,6 @@ services:
         container_name: grafana
         env_file: basic_auth.env
         user: "472"
-        ports:
-            - '3000:3000'
         links: 
             - influxdb
         volumes: 
