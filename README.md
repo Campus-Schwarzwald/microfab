@@ -14,7 +14,7 @@ Microfab abstracts the data traffic of a production onto a board. With two ESP32
       }
       class WiFi_Router{
           TP-Link
-          SSID: Microfab_00x
+          Microfab_00x
       }
       class MQTT_Client{
           Espressif ESP32
