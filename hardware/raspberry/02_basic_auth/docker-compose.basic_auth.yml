@@ -61,6 +61,7 @@ services:
 
     opc-client:
         build: ./frontend
+        container_name: opc-client
         privileged: true
         restart: always
         ports:
