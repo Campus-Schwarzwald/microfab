@@ -8,7 +8,7 @@ This documentation describes the final setup of the containers
 
 - Go to: http://192.168.88.100:8086
 
-![](./img/influxdb_001.png)
+![](/img/influxdb_001.png)
 
 - Login with admin:microfoo123
 
