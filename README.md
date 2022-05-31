@@ -13,8 +13,8 @@ Microfab abstracts the data traffic of a production onto a board. With two ESP32
           Docker
       }
       class WiFi_Router{
-          TP-Link
-          Microfab_00x
+          TP-Link Router
+          ssid: Microfab_00x
       }
       class MQTT_Client{
           Espressif ESP32
@@ -24,5 +24,24 @@ Microfab abstracts the data traffic of a production onto a board. With two ESP32
           Open62541 OPC Server      
       }
       
+```
+
+
+```mermaid
+  flowchart TB
+        id1_1[MQTT Client]
+        id1_2[OPC Server]
+        id2_1[MQTT Broker - Mosquitto]
+        id2_2[OPC Client]
+        id3[Telegraf]
+        id4[InfluxDB]
+        id5[Grafana]
+
+        id1_1 --> id2_1
+        id1_2 --> id2_2
+        id2_1 --> id3
+        id2_2 --> id3
+        id3 --> id4
+        id4 --> id5
       
 ```
