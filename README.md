@@ -3,7 +3,7 @@ Microfab abstracts the data traffic of a production onto a board. With two ESP32
 
 
 ```mermaid
-  classDiagram;
+  classDiagram
       MicrofabControl -- WiFi_Router
       MQTT_Client -- WiFi_Router
       OPC_Server -- WiFi_Router
