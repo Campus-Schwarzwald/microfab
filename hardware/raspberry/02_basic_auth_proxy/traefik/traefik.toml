@@ -17,8 +17,8 @@
         pushInterval = "42s"
         # Same as that of the environment file
         database = "edge"
-        username = "tiguitto"
-        password = "tiguitto"
+        username = "admin"
+        password = "microfoo123"
         addEntryPointsLabels = true
         addServicesLabels = true
 
