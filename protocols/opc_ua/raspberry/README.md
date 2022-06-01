@@ -21,7 +21,7 @@
         - Set static IP
             ```bash
             interface wlan0
-            static ip_address=192.168.88.100/24
+            static ip_address=192.168.88.101/24
             static routers=192.168.88.1 
             ```
         - Deactivate energy save mode
@@ -37,12 +37,12 @@
 - Update & Upgrade
     ```bash
     sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get upgrade -y
     ```
 - Install Git
 
 
-    sudo apt install git
+    sudo apt install git -y
 
 - Install cmake and ccmake
 
@@ -75,6 +75,47 @@
 
     make 
     cd bin/examples 
-    ./tutorial_server_firststeps
+
+- Test the Server
+
+
+    ./server_inheritance
 
 server is now running on the Raspberry Pi and will be listening in the port 4840
+
+# Create service on startup
+
+- Create new service
+
+
+    sudo nano /lib/systemd/system/opc.service
+
+- Insert configuration
+
+
+     [Unit]
+     Description=OPC UA Server
+     After=multi-user.target
+    
+     [Service]
+     Type=idle
+     ExecStart=/home/pi/open62541/build/bin/examples/server_inheritance
+    
+     [Install]
+     WantedBy=multi-user.target
+
+- Set permissions
+
+
+    sudo chmod 644 /lib/systemd/system/opc.service
+
+- Configure systemd
+
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable opc.service
+
+- Reboot the device
+
+
+    sudo reboot

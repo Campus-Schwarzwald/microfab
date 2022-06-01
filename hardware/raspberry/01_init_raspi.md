@@ -43,7 +43,7 @@ This document explains step by step the initial setup and configuration of the R
     ```
 - Install Git
     ``` bash
-    sudo apt install git
+    sudo apt install git -y
     ```
 - Clone the Repo
     ``` bash

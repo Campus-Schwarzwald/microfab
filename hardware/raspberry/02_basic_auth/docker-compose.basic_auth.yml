@@ -5,6 +5,7 @@ services:
         image: influxdb:latest
         container_name: influxdb
         env_file: basic_auth.env
+        restart: always
         ports:
             - '8086:8086'
         volumes: 
@@ -35,6 +36,7 @@ services:
     telegraf:
         image: telegraf:1.16
         container_name: telegraf
+        restart: always
         links: 
             - influxdb
         env_file: basic_auth.env
@@ -49,6 +51,7 @@ services:
         image: grafana/grafana:7.1.0
         container_name: grafana
         env_file: basic_auth.env
+        restart: always
         user: "472"
         ports:
             - '3000:3000'
