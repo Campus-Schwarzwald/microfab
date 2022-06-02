@@ -58,5 +58,15 @@ This documentation describes the final setup of the containers
 
 ![](/img/grafana_005.png)
 
+# OPC UA
+
+- To acces the OPC UA Web Client go to: http://192.168.88.100:8000
+
+- Define the Server adress: opc.tcp://192.168.88.101:4840/freeopcua/server/
+
+- Press connect
+
+![](/img/opc_001.png)
+
 
 

@@ -39,7 +39,7 @@ This document explains step by step the initial setup and configuration of the R
 - Update & Upgrade
     ```bash
     sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get upgrade -y
     ```
 - Install Git
     ``` bash

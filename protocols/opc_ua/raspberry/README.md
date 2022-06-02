@@ -47,7 +47,7 @@
 - Install cmake and ccmake
 
 
-    sudo apt-get install build-essential cmake
+    sudo apt-get install build-essential cmake -y
     sudo apt-get install cmake-curses-gui
 
 - Download the repo

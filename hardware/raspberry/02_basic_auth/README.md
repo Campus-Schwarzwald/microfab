@@ -50,6 +50,7 @@ However, recent events show that the sole use of user:password carries high risk
 
          Access the logs: docker-compose -f docker-compose.basic_auth.yml logs --tail=10
 
+         Bring Docker compose down: docker-compose -f docker-compose.basic_auth.yml down
 5. All files which are needed to setup the ESP32 can be found [here](/hardware/esp/02_basic_auth).
 
 
