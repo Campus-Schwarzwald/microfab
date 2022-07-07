@@ -4,13 +4,21 @@
 # Installs an OPC UA server on the Raspberry Pi (Raspbian)
 #
 # Run from the web:
-#   bash <(curl -s https://gist.githubusercontent.com/blacktm/8302741/raw/install_ruby_rpi.sh)
+#   curl -s https://gist.githubusercontent.com/FHatCSW/59b6364b74795fd900b153654b0f0807/raw/bfd28dc2896b0d4d20b28937795be1681d0a9118/install_opc_server.sh >install.sh
+#   bash ./install.sh
 # --------------------------------------------------------------------------------------------
 
 # Welcome message
 echo -e "
 This will install an OPC Server using https://github.com/open62541/open62541.
 It will take about 20 minutes to compile on the original Raspberry Pi.\n"
+
+echo -e "
+\n*****************************
+\n*****************************
+\nThere is a manual step in this script (ccmake). You need to enable the UA_EXAMPLE press (c) and afterwards press (g)'
+\n*****************************
+\n*****************************\n"
 
 # Prompt to continue
 read -p "  Continue? (y/n) " ans
@@ -19,6 +27,9 @@ if [[ $ans != "y" ]]; then
   exit
 fi
 echo
+
+# Time the install process
+START_TIME=$SECONDS
 
 echo -e "\nupdating ..."
 sudo apt-get update
@@ -53,7 +64,7 @@ make
 
 sudo touch /lib/systemd/system/opc.service
 
-echo -e "[Unit]
+sudo bash -c 'echo "[Unit]
 Description=OPC UA Server
 After=multi-user.target
 
@@ -62,7 +73,7 @@ Type=idle
 ExecStart=/home/pi/open62541/build/bin/examples/server_inheritance
 
 [Install]
-WantedBy=multi-user.target" > /lib/systemd/system/opc.service
+WantedBy=multi-user.target" > /lib/systemd/system/opc.service'
 
 echo -e "\nCreated 'opc.service' Unit file at '/lib/systemd/system/'"
 
@@ -76,6 +87,8 @@ sudo systemctl enable opc.service
 # Print the time elapsed
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo -e "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n"
+
+echo -e "\nAfter reboot check the service via 'systemctl status opc.service'\n"
 
 read -p "  The Pi needs to reboot. Do you want to reboot? (y/n) " ans
 if [[ $ans != "n" ]]; then
