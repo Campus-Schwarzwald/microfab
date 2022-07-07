@@ -68,7 +68,7 @@
     
     ccmake .. 
 
-    enable the UA_BUILD_EXAMPLES option, then configure(c) and generate(g) the makefile
+    enable the UA_EXAMPLE option, then configure(c) and generate(g) the makefile
 
 - Make
 

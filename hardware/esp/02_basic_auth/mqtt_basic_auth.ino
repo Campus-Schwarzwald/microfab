@@ -12,12 +12,12 @@
   IPAddress server(192, 168, 88, 100);
   const char *MQTT_HOST = "192.168.88.100";
   const int MQTT_PORT = 1883;
-  const char *MQTT_USER = "pubclient"; // leave blank if no credentials used
-  const char *MQTT_PASS = "microfoo123"; // leave blank if no credentials used
+  const char *MQTT_USER = "pubclient";
+  const char *MQTT_PASS = "microfoo123";
 
 #endif
 
-const char* topic = "test/"; // CHANGE SensorID here!
+const char* topic = "test/";
 char output[128];
 time_t now;
 
