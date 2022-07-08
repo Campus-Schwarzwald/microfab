@@ -1,4 +1,9 @@
 
+> 07-07-2022 - Florian Handke: There seems to be an issue with open62541 and the Raspberry. 
+I opened an issue on Github: https://github.com/open62541/open62541/issues/5245
+> 
+> If there is progress on this, I will come back to open62541
+
 - Install Raspberry Pi OS Lite with Raspberry Pi Imager
     - Hostname: MicrofabControl001 ... MicrofabControl006
     - Activate SSH

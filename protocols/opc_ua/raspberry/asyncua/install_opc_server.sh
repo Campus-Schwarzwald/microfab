@@ -3,6 +3,8 @@
 # --------------------------------------------------------------------------------------------
 # Installs an OPC UA server on the Raspberry Pi (Raspbian)
 #
+# The server is Python based (asyncua)
+#
 # Run from the web:
 #   curl -s https://gist.githubusercontent.com/FHatCSW/59b6364b74795fd900b153654b0f0807/raw/bfd28dc2896b0d4d20b28937795be1681d0a9118/install_opc_server.sh >install.sh
 #   bash ./install.sh
@@ -10,15 +12,9 @@
 
 # Welcome message
 echo -e "
-This will install an OPC Server using https://github.com/open62541/open62541.
-It will take about 20 minutes to compile on the original Raspberry Pi.\n"
+This will install an OPC Server using https://github.com/FreeOpcUa/opcua-asyncio.
+It will take about 10 minutes to compile on the original Raspberry Pi.\n"
 
-echo -e "
-\n*****************************
-\n*****************************
-\nThere is a manual step in this script (ccmake). You need to enable the UA_EXAMPLE press (c) and afterwards press (g)'
-\n*****************************
-\n*****************************\n"
 
 # Prompt to continue
 read -p "  Continue? (y/n) " ans
@@ -37,30 +33,28 @@ sudo apt-get update
 echo -e "\nupgrading ..."
 sudo apt-get upgrade -y
 
-echo -e "\ninstalling git ..."
-sudo apt install git -y
-
-echo -e "\ninstalling cmake ..."
-sudo apt-get install build-essential cmake -y
-
-echo -e "\ninstalling cmake-curses-gui ..."
-sudo apt-get install cmake-curses-gui
+echo -e "\ninstalling git, python ..."
+sudo apt-get install git python3 python-is-python3 pip -y
 
 echo -e "\ncloning the repository ..."
-git clone https://github.com/open62541/open62541.git
+git clone https://github.com/FreeOpcUa/opcua-asyncio.git
 
 echo -e "\nbuilding the server ..."
-cd open62541
+cd opcua-asyncio
+
+echo -e "\ninstall requirements ..."
+#python3 -m pip install -r requirements.txt
+#python3 -m pip install -r dev_requirements.txt
+python -m pip install asyncua
+
+echo -e "\nused python:"
+python -c "import sys; print(sys.path)"
+
+
 mkdir build
 cd build
-cmake ..
-echo -e "\n...server build"
 
-echo -e "\nconfigure ccmake"
-ccmake ..
-
-echo -e "\nmake ..."
-make
+curl -s https://gist.githubusercontent.com/FHatCSW/8306c419a63108af44625807fd0230cb/raw/e1bcc5fa9a0670562011dd6c9794b4564bc3ad2c/01_microfab_opcua_server_no_auth.py >01_microfab_opcua_server_no_auth.py
 
 sudo touch /lib/systemd/system/opc.service
 
@@ -70,7 +64,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/home/pi/open62541/build/bin/examples/server_inheritance
+ExecStart=/usr/bin/python3 /home/pi/opcua-asyncio/build/01_microfab_opcua_server_no_auth.py
 
 [Install]
 WantedBy=multi-user.target" > /lib/systemd/system/opc.service'
@@ -79,10 +73,28 @@ echo -e "\nCreated 'opc.service' Unit file at '/lib/systemd/system/'"
 
 echo -e "\nSetting permissions for opc.service"
 sudo chmod 644 /lib/systemd/system/opc.service
+chmod +x /home/pi/opcua-asyncio/build/01_microfab_opcua_server_no_auth.py
 
 echo -e "\nEnabling 'opc.service'...\n"
 sudo systemctl daemon-reload
 sudo systemctl enable opc.service
+sudo systemctl start opc.service
+
+echo -e "
+---Changes on /lib/systemd/system/opc.service---
+sudo systemctl daemon-reload
+
+---Check status---
+sudo systemctl status hello.service
+
+---Start service---
+sudo systemctl start hello.service
+
+---Stop service---
+sudo systemctl stop hello.service
+
+---Check service log---
+sudo journalctl -f -u hello.service\n"
 
 # Print the time elapsed
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
