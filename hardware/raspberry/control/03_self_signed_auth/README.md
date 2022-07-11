@@ -59,31 +59,39 @@ This requires subjects which has some hard-coded information in the script.
                 │   ├── influx-server.csr
                 │   └── influx-server.key
                 └── mqtt
+                │   ├── ca.crt
+                │   ├── mqtt-client.crt
+                │   ├── mqtt-client.csr
+                │   ├── mqtt-client.key
+                │   ├── mqtt-server.crt
+                │   ├── mqtt-server.csr
+                │   ├── mqtt-server.key
+                └── opc
                     ├── ca.crt
-                    ├── mqtt-client.crt
-                    ├── mqtt-client.csr
-                    ├── mqtt-client.key
-                    ├── mqtt-server.crt
-                    ├── mqtt-server.csr
-                    ├── mqtt-server.key
+                    ├── opc-client.crt
+                    ├── opc-client.csr
+                    ├── opc-client.key
+                    ├── opc-server.crt
+                    ├── opc-server.csr
+                    ├── opc-server.key
 
         NOTE: We copy the `ca.crt` in each component directory in order to keep the mount volumes in the compose file simple.
 
-4. Distribute `mqtt-client.crt` and `mqtt-client.key` to the Sensor Nodes that need to publish information when `require_certificates` is set to `true` in Mosquitto Configuration File
+5. Distribute `mqtt-client.crt` and `mqtt-client.key` to the Sensor Nodes that need to publish information when `require_certificates` is set to `true` in Mosquitto Configuration File
 
-5. change the Ownership for the Grafana Server Certificates using:
+6. change the Ownership for the Grafana Server Certificates using:
 
     ```bash
         sudo chown -R 472:472 certs/grafana/
     ```
 
-6. Bring the Stack up:
+7. Bring the Stack up:
 
         USER_ID="$(id -u)" GRP_ID="$(id -g)" docker-compose -f docker-compose.selfsigned.yml up -d
 
-7. For your MQTT Clients copy the `ca.crt`, `mqtt-client.crt`, and `mqtt-client.key` and add them to your Apps accordingly.
+8. For your MQTT Clients copy the `ca.crt`, `mqtt-client.crt`, and `mqtt-client.key` and add them to your Apps accordingly.
    
-   All files which are needed to setup the ESP32 can be found [here](/esp/03_self_signed_auth).
+   All files which are needed to setup the ESP32 can be found [here](microfab/hardware/esp/03_self_signed_auth).
 
 ## Publishing with MQTT Clients
 
