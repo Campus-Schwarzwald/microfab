@@ -50,9 +50,9 @@
 
     ## Use TLS but skip chain & host verification
     # Use Certificates if `require_certificate true` in `mosquitto.conf` file
-    tls_ca = "/etc/telegraf/ca.crt"
-    tls_cert = "/etc/telegraf/mqtt-client.crt"
-    tls_key = "/etc/telegraf/mqtt-client.key"
+    tls_ca = "/etc/telegraf/ca_root.cert.pem"
+    tls_cert = "/etc/telegraf/mqtt-client.cert.pem"
+    tls_key = "/etc/telegraf/mqtt-client.key.pem"
     ## Use TLS but skip chain & host verification
     insecure_skip_verify = true
 

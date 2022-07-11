@@ -19,7 +19,6 @@ CN=$(hostname -I | awk '{print $1}')
 CN='192.168.88.100'
 
 SUBJECT_CA="/C=DE/ST=BW/L=Freudenstadt/O=CSW/OU=Certificate Authority"
-SUBJECT_DOMAIN="/C=DE/ST=BW/L=Freudenstadt/O=CSW/OU=DOMAIN/CN=${CN}"
 SUBJECT_MQTT_SERVER="/C=DE/ST=BW/L=Freudenstadt/O=CSW/OU=MQTTSERVER/CN=${CN}"
 SUBJECT_INFLUXDB="/C=DE/ST=BW/L=Freudenstadt/O=CSW/OU=INFLUXDB/CN=${CN}"
 SUBJECT_MQTT_CLIENT="/C=DE/ST=BW/L=Freudenstadt/O=CSW/OU=MQTTCLIENT/CN=${CN}"

@@ -9,8 +9,9 @@ from asyncua.crypto.security_policies import SecurityPolicyBasic256Sha256
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger('asyncua')
 
-cert = f"certificates/peer-certificate-example-{cert_idx}.der"
-private_key = f"certificates/peer-private-key-example-{cert_idx}.pem"
+cert = f"certificates/opc/opc-client.cert.pem"
+private_key = f"certificates/opc-client.key.pem"
+server_cert = f"certificates/opc-server.cert.pem"
 
 async def main():
     url = 'opc.tcp://10.100.13.67:4840/freeopcua/server/'
@@ -67,7 +68,7 @@ async def get_node_tree(url):
             SecurityPolicyBasic256Sha256,
             certificate=cert,
             private_key=private_key,
-            server_certificate="certificate-example.der"
+            server_certificate=server_cert
         )
 
         await client.connect()
@@ -88,8 +89,12 @@ async def get_node_tree(url):
 async def read_data(url):
     try:
         client = Client(url=url)
-        client.set_user()  # Set user name for the connection.
-        client.set_password()  # Set user password for the connection
+        await client.set_security(
+            SecurityPolicyBasic256Sha256,
+            certificate=cert,
+            private_key=private_key,
+            server_certificate=server_cert ## Needs validation
+        )
         await client.connect()
         uri = 'http://examples.freeopcua.github.io'
         idx = await client.get_namespace_index(uri)
