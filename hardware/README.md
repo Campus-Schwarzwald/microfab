@@ -41,15 +41,15 @@ Microfab Control is the central unit of the Microfab. It uses a dockerized techs
     bash ./install.sh
     ```
   
-- The Pi has now the basic setup and you can go with the individual setup which can be one of the following:
+- The Pi has now the basic setup and you can go on with the individual setup which can be one of the following:
 
-  - **No Authenitcation**: microfab/hardware/raspberry/01_no_auth/README.md
+  - **No Authenitcation**: microfab/hardware/raspberry/control/01_no_auth/README.md
 
-  - **Password Authenitcation**: microfab/hardware/raspberry/02_basic_auth/README.md
+  - **Password Authenitcation**: microfab/hardware/raspberry/control/02_basic_auth/README.md
 
-  - **Authenitcation with self signed certificates**: microfab/hardware/raspberry/03_self_signed_auth/README.md
+  - **Authenitcation with self signed certificates**: microfab/hardware/raspberry/control/03_self_signed_auth/README.md
 
-  - **Authenitcation with PKI issued certificates**: microfab/hardware/raspberry/04_pki_auth/README.md
+  - **Authenitcation with PKI issued certificates**: microfab/hardware/raspberry/control/04_pki_auth/README.md
 
 ### Microfab OPC Client
 
@@ -77,7 +77,7 @@ Microfab Control is the central unit of the Microfab. It uses a dockerized techs
 
 - Download the script for the setup
     ``` bash
-    curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/initial_setup_control.sh >install.sh
+    curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/install_opc_server.sh >install.sh    ```
     ```
   
 - Execute the script
@@ -85,3 +85,15 @@ Microfab Control is the central unit of the Microfab. It uses a dockerized techs
     bash ./install.sh
     ```
 
+- The Pi has now the basic setup and you can go on with the individual setup which can be one of the following:
+
+  - **No Authenitcation**: microfab/hardware/raspberry/opc_client/01_no_auth -> Installed with basic setup
+
+  - **Password Authenitcation**: microfab/hardware/raspberry/opc_client/02_basic_auth
+
+  - **Authenitcation with self signed certificates**: microfab/hardware/raspberry/opc_client/03_self_signed_auth
+
+  - **Authenitcation with PKI issued certificates**: microfab/hardware/raspberry/opc_client/04_pki_auth
+
+> The OPC UA Server are Python scripts running as a systemctl service on the Pi. Find more information on how to 
+> implement the server in microfab/hardware/raspberry/opc_server/README.md

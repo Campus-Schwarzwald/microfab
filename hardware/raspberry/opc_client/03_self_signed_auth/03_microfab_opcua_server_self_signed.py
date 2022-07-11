@@ -1,7 +1,7 @@
 import logging
 import asyncio
 import sys
-sys.path.insert(0, "bin/raspberry")
+sys.path.insert(0, "../bin/raspberry")
 
 from asyncua import ua, Server
 from asyncua.common.methods import uamethod
