@@ -45,7 +45,7 @@ cd opcua-asyncio
 echo -e "\ninstall requirements ..."
 #python3 -m pip install -r requirements.txt
 #python3 -m pip install -r dev_requirements.txt
-python -m pip install asyncua
+sudo python pip install asyncua
 
 echo -e "\nused python:"
 python -c "import sys; print(sys.path)"

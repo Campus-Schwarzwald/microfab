@@ -1,10 +1,14 @@
 import logging
 import asyncio
 import sys
-sys.path.insert(0, "..")
+sys.path.insert(0, "bin/raspberry")
 
 from asyncua import ua, Server
 from asyncua.common.methods import uamethod
+from asyncua.crypto.permission_rules import SimpleRoleRuleset
+from asyncua.server.users import UserRole
+from asyncua.server.user_managers import CertificateUserManager
+
 
 @uamethod
 def func(parent, value):
@@ -14,10 +18,22 @@ def func(parent, value):
 async def main():
     _logger = logging.getLogger('asyncua')
     # setup our server
+    cert_user_manager = CertificateUserManager()
+    await cert_user_manager.add_user("certificates/peer-certificate-example-1.der", name='test_user')
+
     server = Server()
     await server.init()
-    server.set_endpoint('opc.tcp://0.0.0.0:4840/freeopcua/server/')
+
+    server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
     server.set_server_name("Microfab OPC UA Server")
+    server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt],
+                               permission_ruleset=SimpleRoleRuleset())
+    # load server certificate and private key. This enables endpoints
+    # with signing and encryption.
+
+    await server.load_certificate("certificate-example.der") # server certificate: .pem or .der
+    await server.load_private_key("private-key-example.pem")
+
 
 
     # setup our own namespace, not really necessary but should as spec

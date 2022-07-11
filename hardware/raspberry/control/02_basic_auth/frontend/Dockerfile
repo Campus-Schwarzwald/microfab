@@ -12,7 +12,7 @@ RUN apt-get install zlib1g-dev
 WORKDIR /usr/src/app
 
 # Copy requirements.txt first for better cache on later pushes
-COPY ./requirements.txt /requirements.txt
+COPY requirements.txt /requirements.txt
 
 # pip install python deps from requirements.txt on the resin.io build server
 #RUN pip install local_packages/tp_manager_backend-1.0.4-py3-none-any.whl

@@ -63,7 +63,7 @@ services:
             - "iotstack"
 
     opc-client:
-        build: ./frontend
+        build: frontend
         container_name: opc-client
         privileged: true
         restart: always

@@ -4,7 +4,7 @@
 # Prepares the Raspberry Pi for further setup
 #
 # Run from the web:
-#   curl -s https://gist.githubusercontent.com/FHatCSW/59b6364b74795fd900b153654b0f0807/raw/bfd28dc2896b0d4d20b28937795be1681d0a9118/install_opc_server.sh >install.sh
+#   curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/initial_setup_control.sh >install.sh
 #   bash ./install.sh
 # --------------------------------------------------------------------------------------------
 
