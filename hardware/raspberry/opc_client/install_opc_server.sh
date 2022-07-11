@@ -54,7 +54,7 @@ python -c "import sys; print(sys.path)"
 mkdir build
 cd build
 
-curl -s https://gist.githubusercontent.com/FHatCSW/8306c419a63108af44625807fd0230cb/raw/e1bcc5fa9a0670562011dd6c9794b4564bc3ad2c/01_microfab_opcua_server_no_auth.py >01_microfab_opcua_server_no_auth.py
+curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/01_no_auth/01_microfab_opcua_server_no_auth.py >01_microfab_opcua_server_no_auth.py
 
 sudo touch /lib/systemd/system/opc.service
 
