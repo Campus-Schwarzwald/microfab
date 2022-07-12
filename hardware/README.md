@@ -13,7 +13,7 @@ Microfab Control is the central unit of the Microfab. It uses a dockerized techs
 
 **OS**: Raspian headless
 
-- Install Raspberry Pi OS Lite with Raspberry Pi Imager
+- Install Raspberry Pi OS Lite (64bit) with Raspberry Pi Imager
     - Hostname: MicrofabControl001 ... MicrofabControl006
     - Activate SSH
     - Set User: pi
@@ -57,7 +57,7 @@ Microfab Control is the central unit of the Microfab. It uses a dockerized techs
 
 **OS**: Raspian headless
 
-- Install Raspberry Pi OS Lite with Raspberry Pi Imager
+- Install Raspberry Pi OS Lite (32bit) with Raspberry Pi Imager
     - Hostname: MicrofabOPCClient001 ... MicrofabOPCClient006
     - Activate SSH
     - Set User: pi

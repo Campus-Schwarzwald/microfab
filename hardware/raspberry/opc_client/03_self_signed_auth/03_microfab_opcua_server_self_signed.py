@@ -19,7 +19,7 @@ async def main():
     _logger = logging.getLogger('asyncua')
     # setup our server
     cert_user_manager = CertificateUserManager()
-    await cert_user_manager.add_user("certificates/peer-certificate-example-1.der", name='test_user')
+    await cert_user_manager.add_user("opc-client.cert.pem", name='microfab_opc_client')
 
     server = Server()
     await server.init()

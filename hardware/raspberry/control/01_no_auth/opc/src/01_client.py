@@ -110,11 +110,11 @@ async def run_loop_forever(url):
             "\n##### This loop runs forever and reads every {} s the OPC UA values from the server. (n = {}) #####\n".format(
                 time_sleep, n))
         await read_data(url)
-        time.sleep(4)
+        time.sleep(time_sleep)
 
 
 if __name__ == "__main__":
-    url = "opc.tcp://10.100.13.67:4840/freeopcua/server/"
+    url = "opc.tcp://192.168.88.101:4840/freeopcua/server/"
     loop = asyncio.get_event_loop()
     loop.run_until_complete(run_loop_forever(url))
     loop.run_forever()

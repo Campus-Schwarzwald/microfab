@@ -50,6 +50,16 @@ sudo python pip install asyncua
 echo -e "\nused python:"
 python -c "import sys; print(sys.path)"
 
+echo -e "\nsetting a static ip..."
+sudo bash -c 'echo "
+interface wlan0
+static ip_address=192.168.88.101/24
+static routers=192.168.88.1
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wireless-power off
+" >> /etc/dhcpcd.conf'
 
 mkdir build
 cd build
