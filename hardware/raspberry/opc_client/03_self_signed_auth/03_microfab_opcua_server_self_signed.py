@@ -31,8 +31,8 @@ async def main():
     # load server certificate and private key. This enables endpoints
     # with signing and encryption.
 
-    await server.load_certificate("certificate-example.der") # server certificate: .pem or .der
-    await server.load_private_key("private-key-example.pem")
+    await server.load_certificate("opc-server.cert.pem") # server certificate: .pem or .der
+    await server.load_private_key("opc-server.key.pem")
 
 
 

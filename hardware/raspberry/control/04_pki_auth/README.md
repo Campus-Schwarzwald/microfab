@@ -47,6 +47,27 @@ A client certificate and corresponding private key in encrypted PEM format issue
         ├── opc-server.cert.csr
         ├── opc-server.key.pem
 
+## OPC & MQTT Profiles
+
+### Certificate Profiles
+
+**Key Algorithm**: RSA
+**Bit Length**: 2048
+**Key Usage**: Digital Signature, Key encipherment
+**Extended Key Usage**: Client Authentication, Server Authentication
+
+### End Entity Profiles
+
+#### Server
+
+**CN**: 192.168.88.100
+**OU**: HackTheFab
+**O**: Campus Schwarzwald
+**C**: DE
+
+**Token**: P12 file
+
+
 ## Additional
 
 - Public Key is a subset of the Private Key (for RSA) = often called key pair
