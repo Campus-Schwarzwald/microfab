@@ -6,7 +6,7 @@
 # The server is Python based (asyncua)
 #
 # Run from the web:
-#   curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/install_opc_server.sh >install.sh
+#   curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/install_opc_server.sh >install.sh
 #   bash ./install.sh
 # --------------------------------------------------------------------------------------------
 
