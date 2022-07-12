@@ -59,14 +59,50 @@ A client certificate and corresponding private key in encrypted PEM format issue
 ### End Entity Profiles
 
 #### Server
+**CN**: 192.168.88.100
+**OU**: HackTheFab
+**O**: Campus Schwarzwald
+**C**: DE
+**Token**: P12 file
+
+#### Client
+**CN**: ??
+**OU**: HackTheFab
+**O**: Campus Schwarzwald
+**C**: DE
+**Token**: P12 file
+
+## InfluxDB
+### Certificate Profiles
+
+**Key Algorithm**: RSA
+**Bit Length**: 2048
+**Key Usage**: Digital Signature, Key encipherment
+**Extended Key Usage**: Client Authentication, Server Authentication
+
+### End Entity Profiles
 
 **CN**: 192.168.88.100
 **OU**: HackTheFab
 **O**: Campus Schwarzwald
 **C**: DE
-
 **Token**: P12 file
 
+## Grafana
+### Certificate Profiles
+
+**Key Algorithm**: RSA
+**Bit Length**: 2048
+**Key Usage**: Digital Signature, Key encipherment
+**Extended Key Usage**: Client Authentication, Server Authentication
+
+### End Entity Profiles
+
+**CN**: 192.168.88.100
+**OU**: HackTheFab
+**O**: Campus Schwarzwald
+**C**: DE
+**Token**: P12 file
 
 ## Additional
 
