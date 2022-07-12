@@ -25,22 +25,22 @@ To verify that everything works as expected it is useful to have an OPC UA Clien
   - No authentication
 
       ``` bash
-      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/02_basic_auth/01_microfab_opcua_server_basic_auth.py >01_microfab_opcua_server_basic_auth.py
+      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/02_basic_auth/01_microfab_opcua_server_basic_auth.py >01_microfab_opcua_server_basic_auth.py
       ```
   - Password authentication
   
       ``` bash
-      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/02_basic_auth/02_microfab_opcua_server_basic_auth.py >02_microfab_opcua_server_basic_auth.py
+      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/02_basic_auth/02_microfab_opcua_server_basic_auth.py >02_microfab_opcua_server_basic_auth.py
       ```
   - Self signed certificates authentication 
   
       ``` bash
-      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/03_self_signed_auth/03_microfab_opcua_server_self_signed_auth.py >03_microfab_opcua_server_self_signed_auth.py
+      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/03_self_signed_auth/03_microfab_opcua_server_self_signed_auth.py >03_microfab_opcua_server_self_signed_auth.py
       ```
   - PKI issued certificates authentication 
   
       ``` bash
-      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/03_self_signed_auth/03_microfab_opcua_server_self_signed_auth.py >03_microfab_opcua_server_self_signed_auth.py
+      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/03_self_signed_auth/03_microfab_opcua_server_self_signed_auth.py >03_microfab_opcua_server_self_signed_auth.py
       ```
 
 
