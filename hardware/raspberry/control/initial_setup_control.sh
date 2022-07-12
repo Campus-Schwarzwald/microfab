@@ -63,20 +63,6 @@ iface wlan0 inet manual
 wireless-power off
 " >> /etc/dhcpcd.conf'
 
-echo -e "\nsetting final WiFi credentials..."
-sudo bash -c 'echo "
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=DE
-
-network={
-        ssid="CS-Mitarbeiter"
-        scan_ssid=1
-        psk=f5fb1f87c51f2c12f851ec27953118227ad80beca6a0fa4705fc46fb14c43504
-}
-" > /etc/wpa_supplicant/wpa_supplicant.conf'
-
-
 # Print the time elapsed
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo -e "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n"
