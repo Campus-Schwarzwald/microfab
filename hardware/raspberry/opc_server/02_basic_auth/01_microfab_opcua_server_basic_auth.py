@@ -5,10 +5,6 @@ sys.path.insert(0, "../bin/raspberry")
 
 from asyncua import ua, Server
 from asyncua.common.methods import uamethod
-from asyncua.crypto.permission_rules import SimpleRoleRuleset
-from asyncua.server.users import UserRole
-from asyncua.server.user_managers import CertificateUserManager
-
 
 @uamethod
 def func(parent, value):
@@ -16,24 +12,12 @@ def func(parent, value):
 
 
 async def main():
-    _logger = logging.getLogger('asyncua')
+    _logger = logging.getLogger('microfab_opc_pwd_auth')
     # setup our server
-    cert_user_manager = CertificateUserManager()
-    await cert_user_manager.add_user("opc-client.cert.pem", name='microfab_opc_client')
-
     server = Server()
     await server.init()
-
-    server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
+    server.set_endpoint('opc.tcp://0.0.0.0:4840/freeopcua/server/')
     server.set_server_name("Microfab OPC UA Server")
-    server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt],
-                               permission_ruleset=SimpleRoleRuleset())
-    # load server certificate and private key. This enables endpoints
-    # with signing and encryption.
-
-    await server.load_certificate("opc-server.cert.pem") # server certificate: .pem or .der
-    await server.load_private_key("opc-server.key.pem")
-
 
 
     # setup our own namespace, not really necessary but should as spec
@@ -52,7 +36,7 @@ async def main():
         while True:
             await asyncio.sleep(1)
             new_val = await myvar.get_value() + 0.1
-            _logger.info('Set value of %s to %.1f', myvar, new_val)
+            _logger.info('Pure password authentication is not implemented in asyncua: Set value of %s to %.1f', myvar, new_val)
             await myvar.write_value(new_val)
 
 

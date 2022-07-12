@@ -36,15 +36,7 @@ sudo apt-get upgrade -y
 echo -e "\ninstalling git, python ..."
 sudo apt-get install git python3 python-is-python3 pip -y
 
-echo -e "\ncloning the repository ..."
-git clone https://github.com/FreeOpcUa/opcua-asyncio.git
-
-echo -e "\nbuilding the server ..."
-cd opcua-asyncio
-
 echo -e "\ninstall requirements ..."
-#python3 -m pip install -r requirements.txt
-#python3 -m pip install -r dev_requirements.txt
 sudo python pip install asyncua
 
 echo -e "\nused python:"
@@ -74,7 +66,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python3 /home/pi/opcua-asyncio/build/01_microfab_opcua_server_no_auth.py
+ExecStart=/usr/bin/python3 /home/pi/build/01_microfab_opcua_server_no_auth.py
 
 [Install]
 WantedBy=multi-user.target" > /lib/systemd/system/opc.service'
@@ -83,7 +75,7 @@ echo -e "\nCreated 'opc.service' Unit file at '/lib/systemd/system/'"
 
 echo -e "\nSetting permissions for opc.service"
 sudo chmod 644 /lib/systemd/system/opc.service
-chmod +x /home/pi/opcua-asyncio/build/01_microfab_opcua_server_no_auth.py
+chmod +x /home/pi/build/01_microfab_opcua_server_no_auth.py
 
 echo -e "\nEnabling 'opc.service'...\n"
 sudo systemctl daemon-reload

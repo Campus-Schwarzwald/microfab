@@ -12,7 +12,7 @@ def func(parent, value):
 
 
 async def main():
-    _logger = logging.getLogger('asyncua')
+    _logger = logging.getLogger('microfab_opc_no_auth')
     # setup our server
     server = Server()
     await server.init()
