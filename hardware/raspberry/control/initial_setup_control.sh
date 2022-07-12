@@ -4,7 +4,7 @@
 # Prepares the Raspberry Pi for further setup
 #
 # Run from the web:
-#   curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/initial_setup_control.sh >install.sh
+#   curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/control/initial_setup_control.sh >install.sh
 #   bash ./install.sh
 # --------------------------------------------------------------------------------------------
 
