@@ -40,13 +40,17 @@ To verify that everything works as expected it is useful to have an OPC UA Clien
   - PKI issued certificates authentication 
   
       ``` bash
-      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/03_self_signed_auth/03_microfab_opcua_server_self_signed_auth.py >03_microfab_opcua_server_self_signed_auth.py
+      curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/04_pki_auth/04_microfab_opcua_server_pki_auth.py >04_microfab_opcua_server_pki_auth.py
       ```
 
 
 - Create a service (Change the script in Service > ExecStart)
     ``` bash
+    ## Creating a new service
     sudo touch /lib/systemd/system/opc.service
+
+    ## Creating a new service
+    sudo nano /lib/systemd/system/opc.service
 
     sudo bash -c 'echo "[Unit]
     Description=OPC UA Server

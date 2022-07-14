@@ -1,0 +1,36 @@
+HOME            = .
+RANDFILE        = $ENV::HOME/.rnd
+
+####################################################################
+[ req ]
+default_bits       = 2048
+default_md = sha256
+default_keyfile    = mqtt-server.key.pem
+distinguished_name = subject
+req_extensions     = server_req_extensions
+x509_extensions    = server_req_extensions
+string_mask        = utf8only
+prompt = no
+
+####################################################################
+[ subject ]
+countryName = DE
+stateOrProvinceName = BW
+localityName = FDS
+organizationName    = CampusSchwarzwald
+organizationalUnitName = MQTTSERVER
+commonName   = 192.168.88.100
+
+
+####################################################################
+[ server_req_extensions ]
+
+subjectKeyIdentifier = hash
+basicConstraints     = CA:FALSE
+nsComment            = "OpenSSL Generated Certificate"
+
+nsCertType = client, server
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment, keyCertSign
+extendedKeyUsage= serverAuth, clientAuth
+nsComment = "OpenSSL Generated Certificat"
+subjectAltName = URI:http://examples.freeopcua.github.io,IP: 192.168.88.100

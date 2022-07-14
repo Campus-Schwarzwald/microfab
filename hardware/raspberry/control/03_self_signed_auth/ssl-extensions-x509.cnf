@@ -1,5 +1,0 @@
-# ssl-extensions-x509.cnf
-
-[v3_ca]
-basicConstraints = CA:FALSE
-keyUsage = digitalSignature, keyEncipherment

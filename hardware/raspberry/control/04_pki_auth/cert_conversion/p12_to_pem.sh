@@ -66,6 +66,13 @@ mkdir $(pwd)/$CERTSDIR
 echo -e "\nGenerating the certificate out of the .p12 file"
 openssl pkcs12 -in ${fullname} -out ${basename}.cert.pem -nokeys -chain -info
 
+echo -e "\nGenerating CA chain of P12 file"
+openssl pkcs12 -in ${fullname} -out ca-chain.cert.pem -nokeys -cacerts
+openssl pkcs12 -in ${fullname} -out ca-chain.cert.der -nokeys -cacerts
+
+echo -e "\nConvert PEM to DER"
+#openssl x509 -in ca-chain.cert.pem -out ca-chain.cert.der -outform DER
+
 openssl x509 -in opc-client.cert.pem -noout -ext subjectAltName
 
 echo -e "\nGenerating the private key out of the .p12 file"
@@ -77,4 +84,5 @@ openssl x509 -in ${basename}.cert.pem -out ${basename}.cert.der -outform DER
 echo -e "\nMove ...key.pem, ...cert.pem and ...cert.der to directory"
 mv ${basename}.* $(pwd)/$CERTSDIR/
 mv ${file_path} $(pwd)/$CERTSDIR/
+mv ca-chain.* $(pwd)/$CERTSDIR/
 

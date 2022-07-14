@@ -12,7 +12,7 @@ echo 00 > serial
 echo 1000 > crlnumber
 
 # CA: Create Private Key & Self Signed Certificate
-openssl req -x509 -config openssl-ca.cnf -newkey rsa:2048 -nodes -out cacert.pem -outform PEM -days 3600
+openssl req -x509 -config ./cnf/openssl-ca.cnf -newkey rsa:2048 -nodes -out cacert.pem -outform PEM -days 3600
 # There should now to two more files
 #  cacert.pem (Self Signed Certificate)
 #  cakey.pem (CA Private Key) (WITHOUT A PASSWORD)
@@ -29,7 +29,7 @@ openssl x509 -in cacert.pem -out cacert.der -outform DER
 ## Generate Client Certificates
 
 # Client: Generate Private Key & Certificate Signing Request (CSR)
-openssl req -config openssl-client.cnf -newkey rsa:2048 -sha256 -nodes -out opc-client.cert.csr -outform PEM
+openssl req -config ./cnf/openssl-client.cnf -newkey rsa:2048 -sha256 -nodes -out opc-client.cert.csr -outform PEM
 # There should be two more files
 #   opc-client.key.pem (Client Private Key)
 #   opc-client.cert.scr (Certificate Signing Request)

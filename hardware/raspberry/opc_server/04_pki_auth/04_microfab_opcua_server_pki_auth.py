@@ -19,7 +19,7 @@ async def main():
     _logger = logging.getLogger('microfab_opc_pki')
     # setup our server
     cert_user_manager = CertificateUserManager()
-    await cert_user_manager.add_user("./certs/pki/opc-client.cert.der", name='microfab_opc_client')
+    await cert_user_manager.add_user("/home/pi/build/certs/pki/opc-client.cert.der", name='microfab_opc_client')
 
     server = Server()
     await server.init()
@@ -31,8 +31,8 @@ async def main():
     # load server certificate and private key. This enables endpoints
     # with signing and encryption.
 
-    await server.load_certificate("./certs/pki/opc-server.cert.der") # server certificate: .pem or .der
-    await server.load_private_key("./certs/pki/opc-server.key.pem")
+    await server.load_certificate("/home/pi/build/certs/pki/opc-server.cert.der") # server certificate: .pem or .der
+    await server.load_private_key("/home/pi/build/certs/pki/opc-server.key.pem")
 
     # setup our own namespace, not really necessary but should as spec
     uri = 'http://examples.freeopcua.github.io'
