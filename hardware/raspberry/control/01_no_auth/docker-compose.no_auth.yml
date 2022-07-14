@@ -61,13 +61,13 @@ services:
         networks: 
             - "iotstack"
 
-    opcua:
-        image: ghcr.io/umati/sample-server:main
+    opc-client:
+        build: opc
+        container_name: opc-client
+        privileged: true
+        restart: always
         ports:
-            - "4840:4840"
-        restart: unless-stopped
-        networks:
-            - "iotstack"
+            - "8000:8000"
 
 volumes: 
     influxdb_data:
