@@ -9,12 +9,12 @@ from asyncua.crypto.security_policies import SecurityPolicyBasic256Sha256
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger('asyncua')
 
-cert = f"certificates/opc/opc-client.cert.pem"
-private_key = f"certificates/opc-client.key.pem"
-server_cert = f"certificates/opc-server.cert.pem"
+cert = f"/Users/florianhandke/PycharmProjects/microfab/hardware/raspberry/control/03_self_signed_auth/bin/cert_create/certs/opc-client.cert.der"
+private_key = f"/Users/florianhandke/PycharmProjects/microfab/hardware/raspberry/control/03_self_signed_auth/bin/cert_create/certs/opc-client.key.pem"
+server_cert = f"/Users/florianhandke/PycharmProjects/microfab/hardware/raspberry/control/03_self_signed_auth/bin/cert_create/certs/opc-server.cert.der"
 
 async def main():
-    url = 'opc.tcp://10.100.13.67:4840/freeopcua/server/'
+    url = 'opc.tcp://192.168.88.101:4840/freeopcua/server/'
     # url = 'opc.tcp://commsvr.com:51234/UA/CAS_UA_Server'
     async with Client(url=url) as client:
         # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects
@@ -93,7 +93,7 @@ async def read_data(url):
             SecurityPolicyBasic256Sha256,
             certificate=cert,
             private_key=private_key,
-            server_certificate=server_cert ## Needs validation
+            server_certificate=server_cert
         )
         await client.connect()
         uri = 'http://examples.freeopcua.github.io'
@@ -130,7 +130,7 @@ async def run_loop_forever(url):
 
 
 if __name__ == "__main__":
-    url = "opc.tcp://10.100.13.67:4840/freeopcua/server/"
+    url = "opc.tcp://192.168.88.101:4840/freeopcua/server/"
     loop = asyncio.get_event_loop()
     loop.run_until_complete(run_loop_forever(url))
     loop.run_forever()

@@ -37,7 +37,7 @@ echo -e "\ninstalling git, python ..."
 sudo apt-get install git python3 python-is-python3 pip -y
 
 echo -e "\ninstall requirements ..."
-sudo python pip install asyncua
+sudo pip3 install asyncua
 
 echo -e "\nused python:"
 python -c "import sys; print(sys.path)"
@@ -56,7 +56,7 @@ wireless-power off
 mkdir build
 cd build
 
-curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_client/01_no_auth/01_microfab_opcua_server_no_auth.py >01_microfab_opcua_server_no_auth.py
+curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/opc_server/01_no_auth/01_microfab_opcua_server_no_auth.py >01_microfab_opcua_server_no_auth.py
 
 sudo touch /lib/systemd/system/opc.service
 

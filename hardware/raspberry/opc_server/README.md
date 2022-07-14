@@ -54,7 +54,7 @@ To verify that everything works as expected it is useful to have an OPC UA Clien
     
     [Service]
     Type=idle
-    ExecStart=/usr/bin/python3 /home/pi/opcua-asyncio/build/01_microfab_opcua_server_no_auth.py
+    ExecStart=/usr/bin/python3 /home/pi/build/01_microfab_opcua_server_no_auth.py
     
     [Install]
     WantedBy=multi-user.target" > /lib/systemd/system/opc.service'
@@ -63,7 +63,7 @@ To verify that everything works as expected it is useful to have an OPC UA Clien
 - Set permissions for the server (Change the script name according to your implementation)
     ``` bash
     sudo chmod 644 /lib/systemd/system/opc.service
-    chmod +x /home/pi/opcua-asyncio/build/01_microfab_opcua_server_no_auth.py
+    chmod +x /home/pi/build/03_microfab_opcua_server_self_signed_auth.py
     ```
 
 - Reload, enable and start the service

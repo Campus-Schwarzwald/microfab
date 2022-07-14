@@ -19,7 +19,7 @@ async def main():
     _logger = logging.getLogger('microfab_opc_self_signed')
     # setup our server
     cert_user_manager = CertificateUserManager()
-    await cert_user_manager.add_user("./certs/self_signed/opc-client.cert.pem", name='microfab_opc_client')
+    await cert_user_manager.add_user("/home/pi/build/certs/self_signed/opc-client.cert.der", name='microfab_opc_client')
 
     server = Server()
     await server.init()
@@ -31,8 +31,8 @@ async def main():
     # load server certificate and private key. This enables endpoints
     # with signing and encryption.
 
-    await server.load_certificate("./certs/self_signed/opc-server.cert.pem") # server certificate: .pem or .der
-    await server.load_private_key("./certs/self_signed/opc-server.key.pem")
+    await server.load_certificate("/home/pi/build/certs/self_signed/opc-server.cert.pem") # server certificate: .pem or .der
+    await server.load_private_key("/home/pi/build/certs/self_signed/opc-server.key.pem")
 
 
 
