@@ -57,3 +57,43 @@
   timeout = 0.0
   # interface to send ping from (ping -I <INTERFACE>)
   interface = ""
+
+
+[[inputs.opcua]]
+  ## Metric name
+  name = "opcua"
+  #
+  ## OPC UA Endpoint URL
+  endpoint = "opc.tcp://opc-client:4840"
+
+  ## Maximum time allowed to establish a connect to the endpoint.
+  connect_timeout = "30s"
+
+  ## Security policy, one of "None", "Basic128Rsa15", "Basic256",
+  ## "Basic256Sha256", or "auto"
+  security_policy = "None"
+
+  ## Security mode, one of "None", "Sign", "SignAndEncrypt", or "auto"
+  security_mode = "None"
+
+  ## Authentication Method, one of "Certificate", "UserName", or "Anonymous".  To
+  ## authenticate using a specific ID, select 'Certificate' or 'UserName'
+  auth_method = "Anonymous"
+
+  ## Option to select the metric timestamp to use. Valid options are:
+  ##     "gather" -- uses the time of receiving the data in telegraf
+  ##     "server" -- uses the timestamp provided by the server
+  ##     "source" -- uses the timestamp provided by the source
+  timestamp = "gather"
+
+  ## Node ID configuration
+  ## name              - field name to use in the output
+  ## namespace         - OPC UA namespace of the node (integer value 0 thru 3)
+  ## identifier_type   - OPC UA ID type (s=string, i=numeric, g=guid, b=opaque)
+  ## identifier        - OPC UA ID (tag as shown in opcua browser)
+  ## tags              - extra tags to be added to the output metric (optional)
+  ## Example:
+  nodes = [
+      {name="CabinetTemp_M1", namespace="0", identifier_type="i", identifier="11715"}
+  ]
+

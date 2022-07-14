@@ -42,7 +42,18 @@
 
     data_format = "json"
 
-# Retrieve data from OPCUA devices
+[[inputs.ping]]
+  # urls to ping
+  urls = ["192.168.88.1"] # required
+  # number of pings to send (ping -c <COUNT>)
+  count = 1 # required
+  # interval, in s, at which to ping. 0 == default (ping -i <PING_INTERVAL>)
+  ping_interval = 0.0
+  # ping timeout, in s. 0 == no timeout (ping -t <TIMEOUT>)
+  timeout = 0.0
+  # interface to send ping from (ping -I <INTERFACE>)
+  interface = ""
+
 [[inputs.opcua]]
   ## Metric name
   name = "opcua"
@@ -78,6 +89,6 @@
   ## tags              - extra tags to be added to the output metric (optional)
   ## Example:
   nodes = [
-      {name="CabinetTemp_M1", namespace="0", identifier_type="i", identifier="11715"}
+      {name="Sample", namespace="0", identifier_type="i", identifier="11715"}
   ]
 
