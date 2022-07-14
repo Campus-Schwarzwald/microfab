@@ -68,6 +68,10 @@ services:
         restart: always
         ports:
             - "8000:8000"
+        networks:
+            - "iotstack"
+        volumes:
+            - ./:/client
 
 volumes: 
     influxdb_data:
