@@ -94,7 +94,7 @@ This requires subjects which has some hard-coded information in the script.
 
 5. Bring the Stack up:
 
-        USER_ID="$(id -u)" GRP_ID="$(id -g)" docker-compose -f docker-compose.selfsigned.yml up -d
+        docker-compose -f docker-compose.selfsigned.yml up 
 
 6. For your MQTT Clients copy the `cacert.pem`, `mqtt-client.cert.pem`, and `mqtt-client.key.pem` and add them to your Apps accordingly.
    

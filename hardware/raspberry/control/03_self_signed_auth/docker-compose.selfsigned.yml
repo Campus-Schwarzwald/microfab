@@ -42,8 +42,8 @@ services:
         ports:
             - '8125:8125'
         volumes:
-            - ./certs/mqtt:/etc/telegraf
-            - ./certs/opc:/etc/telegraf
+            - ./certs/mqtt:/etc/telegraf/mqtt
+            - ./certs/opc:/etc/telegraf/opc
             - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
         networks: 
             - "iotstack"
