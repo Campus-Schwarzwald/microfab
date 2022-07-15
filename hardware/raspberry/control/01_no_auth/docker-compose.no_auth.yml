@@ -64,7 +64,6 @@ services:
     opc-client:
         build: opc
         container_name: opc-client
-        privileged: true
         restart: always
         ports:
             - "8000:8000"
