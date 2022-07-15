@@ -88,7 +88,7 @@
   ## identifier        - OPC UA ID (tag as shown in opcua browser)
   ## tags              - extra tags to be added to the output metric (optional)
   ## Example:
-  #nodes = [
-  #    {name="Sample", namespace="0", identifier_type="i", identifier="11715"}
-  #]
+  nodes = [
+      {name="Sample", namespace="2", identifier_type="i", identifier="MyObject"}
+  ]
 

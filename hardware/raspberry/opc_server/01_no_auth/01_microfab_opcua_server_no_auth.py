@@ -30,7 +30,11 @@ async def main():
     myvar = await myobj.add_variable(idx, 'MyVariable', 6.7)
     # Set MyVariable to be writable by clients
     await myvar.set_writable()
-    await server.nodes.objects.add_method(ua.NodeId('ServerMethod', 2), ua.QualifiedName('ServerMethod', 2), func, [ua.VariantType.Int64], [ua.VariantType.Int64])
+    await server.nodes.objects.add_method(ua.NodeId('ServerMethod', 2),
+                                          ua.QualifiedName('ServerMethod', 2),
+                                          func,
+                                          [ua.VariantType.Int64],
+                                          [ua.VariantType.Int64])
     _logger.info('Starting server!')
     async with server:
         while True:
