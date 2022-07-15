@@ -15,12 +15,12 @@
 #############################################################
 #                   OUTPUT PLUGINS                          #
 #############################################################
-[[outputs.influxdb]]
+[[outputs.influxdb_v2]]
+
     urls = [ "http://influxdb:8086" ]
-
-    database = "${INFLUXDB_DB}"
-
-    skip_database_creation = false
+    token = "${INFLUX_TOKEN}"
+    organization = "${DOCKER_INFLUXDB_INIT_ORG}"
+    bucket = "${DOCKER_INFLUXDB_INIT_BUCKET}"
 
     timeout = "5s"
 
