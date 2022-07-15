@@ -10,18 +10,19 @@
 
         docker-compose -f docker-compose.no_auth.yml up
 
-3. All files which are needed to setup the ESP32 can be found [here](/esp/01_no_auth).
+3. All files which are needed to setup the ESP32 can be found [here](/hardware/esp/01_no_auth).
 
 
 
 ##  Ports
 
-| Component   | Port  |
-| ----------  | ----- |
-| `influxdb`  | 8086 (internal)  |
-| `telegraf`  | n/a (internal)  |
-| `grafana`   | 3000 (internal) |
-| `mosquitto` | 1883 (mqtt), 1884 (ws) (internal) |
+| Component    | Port                              |
+|--------------|-----------------------------------|
+| `influxdb`   | 8086 (internal)                   |
+| `telegraf`   | n/a (internal)                    |
+| `grafana`    | 3000 (internal)                   |
+| `mosquitto`  | 1883 (mqtt), 1884 (ws) (internal) |
+| `opc-client` | 8000                              |
 
 ## Component Level Security
 

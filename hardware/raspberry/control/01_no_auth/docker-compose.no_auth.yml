@@ -2,7 +2,7 @@ version: "3"
 
 services:
     influxdb:
-        image: arm32v7/influxdb:latest
+        image: influxdb:latest
         container_name: influxdb
         env_file: no_auth.env
         ports:
@@ -65,6 +65,8 @@ services:
         build: opc
         container_name: opc-client
         restart: always
+        links:
+            - telegraf
         ports:
             - "8000:8000"
         networks:
