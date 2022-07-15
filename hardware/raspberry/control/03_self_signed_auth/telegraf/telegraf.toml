@@ -15,18 +15,14 @@
 #############################################################
 #                   OUTPUT PLUGINS                          #
 #############################################################
-[[outputs.influxdb]]
-    urls = [ "https://influxdb:8086" ]
+[[outputs.influxdb_v2]]
 
-    database = "edge"
-
-    skip_database_creation = false
+    urls = [ "http://influxdb:8086" ]
+    token = "${INFLUX_TOKEN}"
+    organization = "${DOCKER_INFLUXDB_INIT_ORG}"
+    bucket = "${DOCKER_INFLUXDB_INIT_BUCKET}"
 
     timeout = "5s"
-    username = "${INFLUXDB_USER}"
-    password = "${INFLUXDB_USER_PASSWORD}"
-    ## Use TLS but skip chain & host verification
-    insecure_skip_verify = true
 
 
 ##################################################################
@@ -50,7 +46,7 @@
 
     ## Use TLS but skip chain & host verification
     # Use Certificates if `require_certificate true` in `mosquitto.conf` file
-    tls_ca = "/etc/telegraf/ca_root.cert.pem"
+    tls_ca = "/etc/telegraf/cacert.pem"
     tls_cert = "/etc/telegraf/mqtt-client.cert.pem"
     tls_key = "/etc/telegraf/mqtt-client.key.pem"
     ## Use TLS but skip chain & host verification

@@ -233,6 +233,11 @@ sed 's/^/"/; s/$/\\n" \\/' pre-cacert.txt > cacert.txt
 
 rm pre-*
 
+cp cacert.pem certs_issued/mqtt/
+cp cacert.pem certs_issued/opc/
+cp cacert.pem certs_issued/influxdb/
+cp cacert.pem certs_issued/grafana/
+
 mv mqtt* certs_issued/mqtt/
 mv cacert.txt certs_issued/mqtt/
 mv opc* certs_issued/opc/
@@ -248,6 +253,8 @@ mv crlnumber.* certs_issued/root/
 mv index.* certs_issued/root/
 
 mv *.pem certs_issued/root/
+
+
 
 
 
