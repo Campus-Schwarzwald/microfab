@@ -3,13 +3,11 @@ import sys
 # sys.path.insert(0, "..")
 import logging
 import time
-import os
 from asyncua import Client, Node, ua
 
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger('asyncua')
 
-_logger.info('ACTUAL WORKING DIRECTORY: {}'.format(os.getcwd()))
 
 async def main():
     url = 'opc.tcp://10.100.13.67:4840/freeopcua/server/'

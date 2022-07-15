@@ -14,10 +14,10 @@
 
     - Install ESP32 development board
     
-        - Click Tools -> Development Board -> Development Board Management -> Search ESP32 -> Install
+        - Tools -> Development Board -> Development Board Management -> Search ESP32 -> Install
     
     - Install PubSub Client
-        - Project -> Load library -> Library manager... -> Search PubSubClient -> Install PubSubClient by Nick O’Leary
+        - Tools -> Manage Libraries -> Search PubSubClient by Nick O’Leary -> Install PubSubClient 
     
     - Upload files to the ESP
         - To upload files to the ESP follow [these](https://github.com/me-no-dev/arduino-esp32fs-plugin) instructions

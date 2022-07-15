@@ -14,14 +14,14 @@
   - What would be a solution to secure them?
   - How can we manipulate the system with a stolen private key?
 
+- Why is copying of private keys on several devices a strong security risk?
+  - Have a look at the docker-compose file of the self signed certificate section
 
-- Why should is a long validity of a self-signed certificate a problem?
+- Why is a long validity of a self-signed certificate a problem?
   - If using self-signed certificates. What are proper time spans?
-
 
 - Is it a good manner to execute bash scripts from an unknown source? 
   - Did you check the script before executing it?
-
 
 - How can we implement more security to the ESP32
 

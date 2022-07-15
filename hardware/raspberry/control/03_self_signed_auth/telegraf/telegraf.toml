@@ -73,9 +73,9 @@
 [[inputs.opcua]]
   ## Metric name
   name = "opcua"
-
+  #
   ## OPC UA Endpoint URL
-  endpoint = "opc.tcp://opc-client:4840"
+  endpoint = "opc.tcp://192.168.88.101:4840"
 
   ## Maximum time allowed to establish a connect to the endpoint.
   connect_timeout = "30s"
@@ -94,10 +94,10 @@
   ## Path to cert.pem. Required when security mode or policy isn't "None".
   ## If cert path is not supplied, self-signed cert and key will be generated.
   certificate = "/etc/telegraf/opc-client.cert.pem"
-
+  #
   ## Path to private key.pem. Required when security mode or policy isn't "None".
   ## If key path is not supplied, self-signed cert and key will be generated.
-  private_key = "/etc/telegraf/opc-client.key.pem"
+  private_key = "/etc/telegraf/opc-clien.tkey.pem"
 
   ## Option to select the metric timestamp to use. Valid options are:
   ##     "gather" -- uses the time of receiving the data in telegraf
@@ -113,5 +113,6 @@
   ## tags              - extra tags to be added to the output metric (optional)
   ## Example:
   nodes = [
-      {name="Sample", namespace="0", identifier_type="i", identifier="11715"}
+      {name="Sample", namespace="2", identifier_type="i", identifier="2"}
   ]
+

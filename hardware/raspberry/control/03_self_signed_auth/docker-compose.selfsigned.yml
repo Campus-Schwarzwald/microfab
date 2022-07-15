@@ -43,6 +43,7 @@ services:
             - '8125:8125'
         volumes:
             - ./certs/certs_issued/mqtt:/etc/telegraf
+            - ./certs/certs_issued/opc:/etc/telegraf
             - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
         networks: 
             - "iotstack"
@@ -67,6 +68,8 @@ services:
         container_name: opc-client
         privileged: true
         restart: always
+        volumes:
+            - ./certs/certs_issued/opc:/opc-client/certs
         ports:
             - "8000:8000"
 

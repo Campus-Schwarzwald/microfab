@@ -27,7 +27,7 @@ async def main():
     # populating our address space
     # server.nodes, contains links to very common nodes like objects and root
     myobj = await server.nodes.objects.add_object(idx, 'MyObject')
-    myvar = await myobj.add_variable(idx, 'MyVariable', 6.7)
+    myvar = await myobj.add_variable(idx, 'MyVariable', 2.0)
     # Set MyVariable to be writable by clients
     await myvar.set_writable()
     await server.nodes.objects.add_method(ua.NodeId('ServerMethod', 2), ua.QualifiedName('ServerMethod', 2), func, [ua.VariantType.Int64], [ua.VariantType.Int64])
@@ -35,7 +35,11 @@ async def main():
     async with server:
         while True:
             await asyncio.sleep(1)
-            new_val = await myvar.get_value() + 0.1
+            act_val = await myvar.get_value()
+            if act_val > 10:
+                new_val = 2.0
+            else:
+                new_val = act_val + 0.1
             _logger.info('Pure password authentication is not implemented in asyncua: Set value of %s to %.1f', myvar, new_val)
             await myvar.write_value(new_val)
 

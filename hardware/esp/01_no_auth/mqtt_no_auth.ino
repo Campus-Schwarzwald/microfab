@@ -3,18 +3,23 @@
 #include <PubSubClient.h>
 #include<ArduinoJson.h>
 
-#ifndef SECRET
-  const char ssid[] = "Microfab_01";
-  const char pass[] = "microfoo123";
+const char ssid[] = "Microfab_002";
+const char pass[] = "8UcXxXCF";
 
-  #define HOSTNAME "arduinoClient"
-  IPAddress server(192, 168, 88, 100);
-  const char *MQTT_HOST = "192.168.88.100";
-  const int MQTT_PORT = 1883;
+#define HOSTNAME "arduinoClient"
+IPAddress server(192, 168, 88, 100);
 
-#endif
+IPAddress local_IP(192, 168, 88, 102);
+IPAddress gateway(192, 168, 88, 1);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress primaryDNS(8, 8, 8, 8);
 
-const char* topic = "test/"; // CHANGE SensorID here!
+const char *MQTT_HOST = "192.168.88.100";
+const int MQTT_PORT = 1883;
+
+
+
+const char* topic = "test/";
 char output[128];
 time_t now;
 
@@ -57,15 +62,6 @@ void mqtt_connect()
 
 }
 
-void receivedCallback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Received [");
-  Serial.print(topic);
-  Serial.print("]: ");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-  }
-}
-
 void wifi_connect()
 {
   if (WiFi.status() != WL_CONNECTED) {
@@ -77,8 +73,11 @@ void wifi_connect()
       delay(10);
       WiFi.setHostname(HOSTNAME);
       WiFi.mode(WIFI_STA);
+    // Configures static IP address
+      if (!WiFi.config(local_IP, gateway, subnet, primaryDNS)) {
+        Serial.println("STA Failed to configure");
+      }
       WiFi.begin(ssid, pass);
-      //WiFi.config(IPAddress(ip_static), IPAddress(ip_gateway), IPAddress(ip_subnet), IPAddress(ip_dns));
 
       int Attempt = 0;
       while (WiFi.status() != WL_CONNECTED) {

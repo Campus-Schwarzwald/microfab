@@ -1,6 +1,7 @@
 This document explains step by step the initial setup and configuration of the RaspberryPi
 
 
+
 - Install Raspberry Pi OS Lite with Raspberry Pi Imager
     - Hostname: MicrofabControl001 ... MicrofabControl006
     - Activate SSH
@@ -13,6 +14,15 @@ This document explains step by step the initial setup and configuration of the R
     ``` bash
     ssh pi@MicrofabControl_001.local
     ```
+  
+> To make setup easy, there is a script which can be executed after you logged in via SSH. 
+> 
+> There execute the following command on the Pi:
+>  ``` bash
+>  curl -s https://raw.githubusercontent.com/Campus-Schwarzwald/microfab/main/hardware/raspberry/control/initial_setup_control.sh >install.sh
+>  bash ./install.sh
+>  ```   
+
       
 - Configure WiFi:
     - Add static IP
