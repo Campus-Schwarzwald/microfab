@@ -19,3 +19,7 @@ Shutdown a certain docker compose process:
 remove a conatiner
 
     docker rm -f influxdb
+
+rebuild an existing conatiner
+
+    docker-compose -f docker-compose<...> up --build opc-client

@@ -4,13 +4,17 @@ import sys
 import logging
 import time
 from asyncua import Client, Node, ua
+from asyncua.crypto.security_policies import SecurityPolicyBasic256Sha256
 
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger('asyncua')
 
+cert = f"/app/certs/opc-client.cert.der"
+private_key = f"/app/certs/opc-client.key.pem"
+server_cert = f"/app/certs/opc-server.cert.der"
 
 async def main():
-    url = 'opc.tcp://10.100.13.67:4840/freeopcua/server/'
+    url = 'opc.tcp://192.168.88.101:4840/freeopcua/server/'
     # url = 'opc.tcp://commsvr.com:51234/UA/CAS_UA_Server'
     async with Client(url=url) as client:
         # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects
@@ -60,6 +64,12 @@ async def browse_nodes(node: Node):
 async def get_node_tree(url):
     try:
         client = Client(url=url)
+        await client.set_security(
+            SecurityPolicyBasic256Sha256,
+            certificate=cert,
+            private_key=private_key,
+            server_certificate=server_cert
+        )
 
         await client.connect()
         # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects
@@ -79,6 +89,12 @@ async def get_node_tree(url):
 async def read_data(url):
     try:
         client = Client(url=url)
+        await client.set_security(
+            SecurityPolicyBasic256Sha256,
+            certificate=cert,
+            private_key=private_key,
+            server_certificate=server_cert
+        )
         await client.connect()
         uri = 'http://examples.freeopcua.github.io'
         idx = await client.get_namespace_index(uri)
@@ -110,7 +126,7 @@ async def run_loop_forever(url):
             "\n##### This loop runs forever and reads every {} s the OPC UA values from the server. (n = {}) #####\n".format(
                 time_sleep, n))
         await read_data(url)
-        time.sleep(time_sleep)
+        time.sleep(4)
 
 
 if __name__ == "__main__":

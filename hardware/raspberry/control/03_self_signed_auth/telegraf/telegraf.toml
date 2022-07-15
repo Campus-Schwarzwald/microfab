@@ -97,7 +97,7 @@
   #
   ## Path to private key.pem. Required when security mode or policy isn't "None".
   ## If key path is not supplied, self-signed cert and key will be generated.
-  private_key = "/etc/telegraf/opc-clien.tkey.pem"
+  private_key = "/etc/telegraf/opc-client.key.pem"
 
   ## Option to select the metric timestamp to use. Valid options are:
   ##     "gather" -- uses the time of receiving the data in telegraf

@@ -10,6 +10,7 @@ RUN apt-get install zlib1g-dev
 
 # Set our working directory
 RUN mkdir /app
+RUN mkdir /app/certs
 WORKDIR /app
 
 # Copy requirements.txt first for better cache on later pushes

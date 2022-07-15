@@ -14,9 +14,9 @@ When it comes to self-signed certificates, however, one must always keep in mind
 
 ### Self-Signed Certificates
 
-The bash script `generate-certs.sh` uses `openssl` to generate:
+The bash script `certs/generate-certs.sh` uses `openssl` to generate:
 1. __Certificate Authority (CA)__ key and certificate
-2. keys and certificates for InfluxDB, Mosquitto, Mosquitto Clients for Publishing
+2. keys and certificates for InfluxDB, Mosquitto, Mosquitto Clients for Publishing, an OPC UA Client and Server
 
 This requires subjects which has some hard-coded information in the script.
 
@@ -44,10 +44,20 @@ This requires subjects which has some hard-coded information in the script.
 
     b. This should create the following certificates and keys in the `certs` folder:
 
-                certs/
+                issuedcerts/
                 ├── ca.crt
                 ├── ca.key
                 ├── ca.srl
+                ├── root
+                │   ├── cacert.pem
+                │   ├── cacert.der
+                │   ├── cakey.pem
+                │   ├── index.txt 
+                │   ├── serial
+                │   ├── ...
+                ├── crl
+                │   ├── rootca.crl
+                │   ├── rootca.crl.pem
                 ├── grafana
                 │   ├── ca.crt
                 │   ├── grafana-server.crt
@@ -75,39 +85,39 @@ This requires subjects which has some hard-coded information in the script.
                     ├── opc-server.csr
                     ├── opc-server.key
 
-        NOTE: We copy the `ca.crt` in each component directory in order to keep the mount volumes in the compose file simple.
 
-5. Distribute `mqtt-client.crt` and `mqtt-client.key` to the Sensor Nodes that need to publish information when `require_certificates` is set to `true` in Mosquitto Configuration File
-
-6. change the Ownership for the Grafana Server Certificates using:
+4. change the Ownership for the Grafana Server Certificates using:
 
     ```bash
         sudo chown -R 472:472 certs/grafana/
     ```
 
-7. Bring the Stack up:
+5. Bring the Stack up:
 
         USER_ID="$(id -u)" GRP_ID="$(id -g)" docker-compose -f docker-compose.selfsigned.yml up -d
 
-8. For your MQTT Clients copy the `ca.crt`, `mqtt-client.crt`, and `mqtt-client.key` and add them to your Apps accordingly.
+6. For your MQTT Clients copy the `cacert.pem`, `mqtt-client.cert.pem`, and `mqtt-client.key.pem` and add them to your Apps accordingly.
    
    All files which are needed to setup the ESP32 can be found [here](microfab/hardware/esp/03_self_signed_auth).
 
+7. Same for OPC: Distribute `opc-server.cert.der` and `opc-server.key.pem` to the Sensor Nodes
+
+
 ## Publishing with MQTT Clients
 
-You will require all devices or Apps that will publish data to the Microfab Broker to have the `ca.crt` on them along with the user `pubclient`. 
+You will require all devices or Apps that will publish data to the Microfab Broker to have the `cacert.pem` on them along with the user `pubclient`. 
 The certificate will enable SSL/TLS and the authentication will only allow dedicated devices to publish data to the Broker.
 
 ### Typical MQTT Client Configuration
 
-| Conf | Value        |
-|------|--------------|
-| Host | <IP_Address> |
-| Port | 8883         |
-| User | `pubclient`  |
-| TLS  | `v1.2`       |
-| Pass | `microfoo123`   |
-| cert | `ca.crt`, `mqtt-client.crt`, `mqtt-client.key`     |
+| Conf | Value                                                       |
+|------|-------------------------------------------------------------|
+| Host | <IP_Address>                                                |
+| Port | 8883                                                        |
+| User | `pubclient`                                                 |
+| TLS  | `v1.2`                                                      |
+| Pass | `microfoo123`                                               |
+| cert | `cacert.pem`, `mqtt-client.cert.pem`, `mqtt-client.key.pem` |
 
 
 ## Test the Broker using Paho-MQTT-Python 
@@ -174,26 +184,4 @@ except KeyboardInterrupt as e:
 
 ```
 
-# Grafana Configuration
-
-- Browser login to https://192.168.88.100:3000
-
-   - admin:microfoo123
-   - Create Database  
-      - Go to Configuration -> Data Sources
-      - Add Data Source -> InfluxDB
-      - Define Server URL: http://influxdb:8086
-      - in Auth enable
-         - Basic auth
-         - With credentials
-         - Skip TLS Verify
-      - In Basic Auth Details define
-         - admin:microfoo123
-      - In InfluxDb details define
-         - Database: edge
-      - Safe & test
-    - Create a dashboard
-      - Go to Create -> Dashboard -> Add new panel
-      - Select Data source: InfluxDB
-      - FROM autogen mqtt_consumer WHERE topic = test/arduinoClient SELECT field(data_hall)
        
