@@ -2,7 +2,7 @@ version: "3"
 
 services:
     influxdb:
-        image: arm32v7/influxdb:1.8.10
+        image: influxdb:latest
         container_name: influxdb
         env_file: selfsigned.env
         ports:
