@@ -5,95 +5,104 @@
 #include <PubSubClient.h>
 #include<ArduinoJson.h>
 
-#ifndef SECRET
-  const char ssid[] = "Microfab_01";
-  const char pass[] = "microfoo123";
 
-  #define HOSTNAME "192.168.88.100"
+const char ssid[] = "Microfab_002";
+const char pass[] = "8UcXxXCF";
 
-  const char *MQTT_HOST = "192.168.88.100";
-  const int MQTT_PORT = 8883;
-  const char *MQTT_USER = "pubclient";
-  const char *MQTT_PASS = "microfoo123";
+#define HOSTNAME "192.168.88.100"
 
-  const char* local_root_ca = \
+IPAddress local_IP(192, 168, 88, 102);
+IPAddress gateway(192, 168, 88, 1);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress primaryDNS(8, 8, 8, 8);
+
+const char *MQTT_HOST = "192.168.88.100";
+const int MQTT_PORT = 8883;
+const char *MQTT_USER = "pubclient";
+const char *MQTT_PASS = "microfoo123";
+
+const char* local_root_ca = \
     "-----BEGIN CERTIFICATE-----\n" \
-    "MIIDpTCCAo2gAwIBAgIUDL/Vkt8GUhTDsjXS9rcJQ7g94KIwDQYJKoZIhvcNAQEL\n" \
-    "BQAwYjELMAkGA1UEBhMCREUxDzANBgNVBAgMBkJyZW1lbjEPMA0GA1UEBwwGQnJl\n" \
-    "bWVuMREwDwYDVQQKDAhUSUdVSVRUTzEeMBwGA1UECwwVQ2VydGlmaWNhdGUgQXV0\n" \
-    "aG9yaXR5MB4XDTIyMDMwNzEzMjk1NloXDTMyMDMwNDEzMjk1NlowYjELMAkGA1UE\n" \
-    "BhMCREUxDzANBgNVBAgMBkJyZW1lbjEPMA0GA1UEBwwGQnJlbWVuMREwDwYDVQQK\n" \
-    "DAhUSUdVSVRUTzEeMBwGA1UECwwVQ2VydGlmaWNhdGUgQXV0aG9yaXR5MIIBIjAN\n" \
-    "BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApEdgV0uLxACf7bfqypcYE09fwvhX\n" \
-    "n0elHkIkGCK3QczbFsEVTyZVvjS5SJPkkUWt26nf95474gCL6WJNhRBlVj4O1/A0\n" \
-    "Na6rzIt/55xETrhYFrHvwminTF88WgYSX4EYTrHmqj9tpjEDudk30g84ivtVEnRx\n" \
-    "2eE6Rr5IDlt4JRJRgtZsriRvmmtRSro1ZgB4RHF0DmQgB6eO/TGCfR1x/bb7g2BU\n" \
-    "wdxz7Tps7sSk4lZdnxb6LTTv+Mr2IdvTaa4kQQnsLiEiOJUPxpIgLWNUrRuj/rA5\n" \
-    "FJ21YfVq8G/5poAzpCRV8SbadMHt08mPGd24YnnGmxdqna7VLvKS7umGXQIDAQAB\n" \
-    "o1MwUTAdBgNVHQ4EFgQU5Hk3bbtHqLArrVAA2Av2SAx8GQswHwYDVR0jBBgwFoAU\n" \
-    "5Hk3bbtHqLArrVAA2Av2SAx8GQswDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0B\n" \
-    "AQsFAAOCAQEANTWSepMv/FZdT8qeebTiPF8BfOiDtC5nF82iLWQJ6/rS8wzZe+f0\n" \
-    "r3w8GJjsURwNxNHryikGEjEQqRWk3yhJzm4Q2NPSyxJP/ZrfwNh8OQyH4xxExq92\n" \
-    "9kiGeSTLSgt0ntWCEkLpYpeJ1L/6kH+uJ/lNsJqm8TPX7tY+53MnTO+dB+dQPnu7\n" \
-    "umByx8KJJ1PRLGJX/FZ72NsEViZOoKMXSUQHLSPfxm/5oRd8ynRYaW+IZ4KdLznJ\n" \
-    "xe+3FWzmc4V18kf4JCzl1MADwMHsQGmpmUx2ftJxqYEdXO585ZtV8YmTYp/Imoru\n" \
-    "earH650FUxB12ROO0kA1SrP9sBMxHFQjQQ==\n" \
-    "-----END CERTIFICATE-----";
+"MIIDxDCCAqygAwIBAgIUbey2fOrlPDViYTO+Ecmgyx8L7jIwDQYJKoZIhvcNAQEL\n" \
+"BQAwazELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkJXMQwwCgYDVQQHDANGRFMxGjAY\n" \
+"BgNVBAoMEUNhbXB1c1NjaHdhcnp3YWxkMRMwEQYDVQQLDApIYWNrVGhlRmFiMRAw\n" \
+"DgYDVQQDDAdUZXN0IENBMB4XDTIyMDcxNTE0MjA1NloXDTMyMDUyMzE0MjA1Nlow\n" \
+"azELMAkGA1UEBhMCREUxCzAJBgNVBAgMAkJXMQwwCgYDVQQHDANGRFMxGjAYBgNV\n" \
+"BAoMEUNhbXB1c1NjaHdhcnp3YWxkMRMwEQYDVQQLDApIYWNrVGhlRmFiMRAwDgYD\n" \
+"VQQDDAdUZXN0IENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvdHi\n" \
+"GXMgp1zKOo+4L/D+bQwf088XnuxuqOvrIwIIw2NeU6RyqzXNM+FVazN8lx3u8TGq\n" \
+"WPmeQTyuJtGC45Oujo8Sgk0VQne9v7RcZ9bg7GCUiG4aZjygoMqerH+uiqsKDqOd\n" \
+"UTupKkGq7vb1sewe3L8em9eNJhbUgLG+Wk0YPddIkXt3luxjvNF+OgKDoyTwtnFg\n" \
+"XIWUuZGkoVfaCQfkWhJcjdWkt+q6h26TLnD9K3YUWGDpE5uwr4/BhjRjHzIXobU9\n" \
+"fppVw/dY5vVg/n6v7bpLUs93CcwG7lXLHYnFP4O3CWLU3dHVoKJY16CDW6RtLQwP\n" \
+"bNshnkvrtOqiSQIYWQIDAQABo2AwXjAdBgNVHQ4EFgQUt4UkqtpmSMco/jTbzyeH\n" \
+"kUMQPMYwHwYDVR0jBBgwFoAUt4UkqtpmSMco/jTbzyeHkUMQPMYwDwYDVR0TAQH/\n" \
+"BAUwAwEB/zALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQELBQADggEBAI1L8vT8O1V4\n" \
+"OUv4aqjD1BsOGrbMjsyyitFyjeG+YOq0we25wnciZ3LEK0Ih+xNjih84k1YbJ/kU\n" \
+"L8BoA5rrh/XXV8E+NsQmrqw/HDF5roMCmcQKvlljMZzEw8jmJI1ryru8WVYyPCqJ\n" \
+"lwmQbDC+dnZz96YNAid9I1meF+IGSoSy3+6JAVvlMLL6x5stCR/Zv2GvrFMLo2sh\n" \
+"NlsFR0lMkX/Mgh6S7L/lf99f1B/2/ASuyB7gyAHPvoTmYz2CEruGv6z7fILSPWq7\n" \
+"cg1wFR3ozKEdE0W3DWQmUwTGDsgltrlqevTuNmFosCMDC8E/Q4be0HGdj/GTbhI6\n" \
+"wLygt2CwRbw=\n" \
+"-----END CERTIFICATE-----";
 
 
   const char* local_client_crt = \
-    "-----BEGIN CERTIFICATE-----\n" \
-    "MIIDVTCCAj0CFFaLLY2WBAxePlWLG3bThsMteFzqMA0GCSqGSIb3DQEBCwUAMGIx\n" \
-    "CzAJBgNVBAYTAkRFMQ8wDQYDVQQIDAZCcmVtZW4xDzANBgNVBAcMBkJyZW1lbjER\n" \
-    "MA8GA1UECgwIVElHVUlUVE8xHjAcBgNVBAsMFUNlcnRpZmljYXRlIEF1dGhvcml0\n" \
-    "eTAeFw0yMjAzMDcxMzMwMTFaFw0zMjAzMDQxMzMwMTFaMGwxCzAJBgNVBAYTAkRF\n" \
-    "MQ8wDQYDVQQIDAZCcmVtZW4xDzANBgNVBAcMBkJyZW1lbjENMAsGA1UECgwEQklC\n" \
-    "QTETMBEGA1UECwwKTVFUVENMSUVOVDEXMBUGA1UEAwwOMTY5LjI1NC4zMS4yNDgw\n" \
-    "ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC+Q7ZYBPDgxbdQzxnw4JZm\n" \
-    "DS0FUDSPDNotw6yZhfmqrWwJxVeG20FWU61p2Tbhnz6Ya6/cSAUQvmPW0Ik0kkzM\n" \
-    "txvHTgtqI3kNalBYVJOuddN5PF+Ks8kCd6KTogCjjFRJaVyCSm+1PSs5pAQ5EXaQ\n" \
-    "ymzNMvsgvGkaNY0mzZxHshnZkuCChvRMmTDNxz+h5z74GQsF/9b01FcWxNLyA5O4\n" \
-    "/fXsFHVcgqchtoNNrcBWYHV3HEWX3CijN16jWOKbSLwY+LYQQ6hCnyXlO9r7TwrB\n" \
-    "ujaB2zZTRwO4BgdFphrYRFHZFNgl92On1/RCcphy0bTGyZS0gaMACJ9mfkO0hdwh\n" \
-    "AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAIVAdVfRaJryVoz8MOA7oeV7A0jgjlCW\n" \
-    "7WFylB0u3ZE1KV+UhlRH+6tfKzTPkfNpEvfNjbzwc+dDle34MvdYPJE4+iTlJKVF\n" \
-    "pVTOe7MehX38sairEar232uMb1UVmeBSruAjCCMoLm5l4VgJj/JBr/PUY1uEBfux\n" \
-    "WkTLG7ZMHU2NmsyXJyPspu7+jQRzx4VW1CYmczlBzhCwlTCa1DNm0L9kuG+Ao0dJ\n" \
-    "65X4dXgf4OqlGIyO9e9SIvQ0YJJ2iZ387D6a9TOSsZflLMaswEmYUex7jws17R8X\n" \
-    "8AYwzZHihC5dKeDDxm6uj2PBpcwUd8DbpaOGrgGMLMJ2Munz92tbM2U=\n" \
-    "-----END CERTIFICATE-----";
+"-----BEGIN CERTIFICATE-----\n" \
+"MIIESTCCAzGgAwIBAgIBAjANBgkqhkiG9w0BAQsFADBrMQswCQYDVQQGEwJERTEL\n" \
+"MAkGA1UECAwCQlcxDDAKBgNVBAcMA0ZEUzEaMBgGA1UECgwRQ2FtcHVzU2Nod2Fy\n" \
+"endhbGQxEzARBgNVBAsMCkhhY2tUaGVGYWIxEDAOBgNVBAMMB1Rlc3QgQ0EwHhcN\n" \
+"MjIwNzE1MTQyMTAwWhcNNDkxMTMwMTQyMTAwWjByMQswCQYDVQQGEwJERTELMAkG\n" \
+"A1UECAwCQlcxDDAKBgNVBAcMA0ZEUzEaMBgGA1UECgwRQ2FtcHVzU2Nod2Fyendh\n" \
+"bGQxEzARBgNVBAsMCk1RVFRDTElFTlQxFzAVBgNVBAMMDjE5Mi4xNjguODguMTAy\n" \
+"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA219e5HuefikE+jGscD2e\n" \
+"79EQOPQzzbNn9FXt4OuASuvOQ+d5S9cbfie9FQQtrqcAGbzAW5xfXCveBQAN3CtL\n" \
+"znldjIvTUr759pxd1Bd0Yer1bLvxA6wh4rCcA/iIcBBOkeToixdEHPpl0SQdhjGj\n" \
+"TnfRY+QTElth3XWZS8zTfshsH7ltM1oWqargPgBVZf15V49+qdNYiMsjpRWQ10zK\n" \
+"u3jpIh0Wf1D9Ocm9yiR71vZ3W3TTvd5deQ7CVivu8lOVj/kYdM25Cn1TLu1Kzl+N\n" \
+"BZNdcVYGGcaRiQkDJfEH4TjRjTsYcE0lJeiCIQsjS6ayPevvsxxPetYCN8zNXINl\n" \
+"SwIDAQABo4HwMIHtMB0GA1UdDgQWBBQYJbpo8RsPW57tVkFM3c5Kvn58TjAfBgNV\n" \
+"HSMEGDAWgBS3hSSq2mZIxyj+NNvPJ4eRQxA8xjAJBgNVHRMEAjAAMAsGA1UdDwQE\n" \
+"AwIFoDARBglghkgBhvhCAQEEBAMCBsAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsG\n" \
+"AQUFBwMCMCsGCWCGSAGG+EIBDQQeFhxPcGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZp\n" \
+"Y2F0MDQGA1UdEQQtMCuGI2h0dHA6Ly9leGFtcGxlcy5mcmVlb3BjdWEuZ2l0aHVi\n" \
+"LmlvhwTAqFhmMA0GCSqGSIb3DQEBCwUAA4IBAQBpMc0jcwMLuY0q0Rh7hIwYBEnL\n" \
+"tQeoxn9quiQBQ6eJ/SBDXXifQsBKrFiHeXxb+snYQce07CwcRQHwoE0QYUgO87YK\n" \
+"olUGsvUP4nvAoNiGPk9E2NeQDhCt36q6eFFyq+Vj9Ovo8hwwL66ftwmg4e+kQ/ce\n" \
+"dZgRF5kNoEC5Z8uqTePdftfHoEW/vINKWSRwcphDP32j/1HCVPkN74nYb9ASrpLx\n" \
+"41xZOEp0VbiCU5P+LIGi0WTiV7qqFEm64s35KCBc6wa+WknoHkwRbzT9g8e31i5y\n" \
+"dSBeV8Qy//wb4/eWxAoTUU/gyysEfu4CIb3kAWQ3zgEsLc2wQzdT1yFCNA7A\n" \
+"-----END CERTIFICATE-----";
 
   const char* local_client_key = \
-    "-----BEGIN PRIVATE KEY-----\n" \
-    "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+Q7ZYBPDgxbdQ\n" \
-    "zxnw4JZmDS0FUDSPDNotw6yZhfmqrWwJxVeG20FWU61p2Tbhnz6Ya6/cSAUQvmPW\n" \
-    "0Ik0kkzMtxvHTgtqI3kNalBYVJOuddN5PF+Ks8kCd6KTogCjjFRJaVyCSm+1PSs5\n" \
-    "pAQ5EXaQymzNMvsgvGkaNY0mzZxHshnZkuCChvRMmTDNxz+h5z74GQsF/9b01FcW\n" \
-    "xNLyA5O4/fXsFHVcgqchtoNNrcBWYHV3HEWX3CijN16jWOKbSLwY+LYQQ6hCnyXl\n" \
-    "O9r7TwrBujaB2zZTRwO4BgdFphrYRFHZFNgl92On1/RCcphy0bTGyZS0gaMACJ9m\n" \
-    "fkO0hdwhAgMBAAECggEAKwcbJJqxctOj2lWLs0rHGHsgVFRIHpW0facD0JBY3v1r\n" \
-    "MmZ7ndbV1tUDoa1q2OlveX7Y/YMYCipUX883SDlRvvYmBROkRzOQe7UwSFmQMGMb\n" \
-    "GQ7LOI3iBnnRvXtkk5f3s8ZtElYNHzqfHOD3x4QogSQWKO2/ly6kwjWcH0tebWP4\n" \
-    "EF6eTsJmMjX8YW5RgNXBQkdakawNV0NWUioHFc8aYGQk+h7HkNrm945sgapeRy82\n" \
-    "Q+oRAsdNk+V8XDvgYHe1AT/9MBk+9ei8Q+h7XlJWgDLtrHb8QG9LTI0zCQmG/ARC\n" \
-    "PQXJ9QYrdRf/40dAO9xM0YTXsf/0DVOU3jF0tjplFQKBgQD6YsLN8K3G9TRHeZuz\n" \
-    "H/3ite4ab7RQMdR/fEmEWRgeyrRmqpTqrxA0NGZWgI2a1xtQjOPXb6qthrbkZT9F\n" \
-    "GXVwK1xpw4r6dCEoOy9LNelILy+DlSr8lNeYRGzfm4BvEwL1Pk/En3fnpFo6CjlK\n" \
-    "lS5g4xNtyFbwavtv3cXOlTTTVwKBgQDCh9lnyYGfQxzfqoWgqYN73fmYFLQumJDR\n" \
-    "5Q8+gH4mvuG+Z+8yzMWWAAe27iLTIYWvUdEff9jmXzVRtUuk3AFSBrU/6eEG8uQj\n" \
-    "nmTxEnTcCl98DzSOqrwdkjtI0wWqBD6277eI5a+mYRWf6IrFZDxRfeCEu9f1xL99\n" \
-    "Q/ggbApZRwKBgQDzthmDNpcPJzDBuV6R1bvbZdXiqYPK4xXBGQq95bKSlh9OJw9X\n" \
-    "9xpAlhhebjZm1qVhnCFRWwG4cX2nhd01tvgWPD5xO8IU0eBMNn9sJ4dvmW4YF6OF\n" \
-    "wqKvNTr703IJq2mfqA0gh0/Airq/75+gNuCzsZMBspTc4mTml+inkZefdQKBgC/L\n" \
-    "fOj5I3Xj4WY62VYeEAYRBdAN1i9UoNBRPSuYGmaeo4xKsQSEN0+hdkPFwpypMdVf\n" \
-    "fsgEe2AuqEUJDCrXOyPSLhoj9nvklZUCx75LUJb3nXo3qiwbWtjRIuvDnTKmlFoS\n" \
-    "D7/83uk8FToSwnW5KPDEwrMaC/eAfaPjXUVqBijlAoGAZUne9HIKas99t5nbw1kl\n" \
-    "6dpC+L6Uwo9VckwPRIh7JBZP78upRS2O8G3z8QEREFHlM9EORzFhKCNUUd5bML+a\n" \
-    "dncKT9PxY30WwamJ/gxX0O14ysRuL9GzbwjgdnDck1eky2Qv9BpG4WNSuwm8eZQX\n" \
-    "OYVXIN85Rboz4StAt/feuIU=\n" \
-    "-----END PRIVATE KEY-----";
-
-#endif
+"-----BEGIN PRIVATE KEY-----\n" \
+"MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbX17ke55+KQT6\n" \
+"MaxwPZ7v0RA49DPNs2f0Ve3g64BK685D53lL1xt+J70VBC2upwAZvMBbnF9cK94F\n" \
+"AA3cK0vOeV2Mi9NSvvn2nF3UF3Rh6vVsu/EDrCHisJwD+IhwEE6R5OiLF0Qc+mXR\n" \
+"JB2GMaNOd9Fj5BMSW2HddZlLzNN+yGwfuW0zWhapquA+AFVl/XlXj36p01iIyyOl\n" \
+"FZDXTMq7eOkiHRZ/UP05yb3KJHvW9ndbdNO93l15DsJWK+7yU5WP+Rh0zbkKfVMu\n" \
+"7UrOX40Fk11xVgYZxpGJCQMl8QfhONGNOxhwTSUl6IIhCyNLprI96++zHE961gI3\n" \
+"zM1cg2VLAgMBAAECggEACIYfp0wgX/GTFm+oriHO062xbi0a+DKw5t8R46vy67ZW\n" \
+"6O+NGIPOtyuvHqpvZfpqOBXL+aNNV0UDFvmmEDiEdQzlNClYuD3gc5Mm2C9jH8zj\n" \
+"5Wo2FrjxBiBrp4HYN1aC3wtgd8sbI+8c1rALD6RNHqbsNW/ux8dSOaswni/ixenM\n" \
+"Szl+FxMHdVW0ynvUbb8OrMMrSssiYG6GVp7XqIToDar4f88vXTIlVaRMdqxNHvbt\n" \
+"5i/N2prUYFh9WvCKY9OK09oeYMK/A6Z/7jgF+je9NN5A7W4k4RuacvI/yCv/C3jo\n" \
+"KbF/AYW9algrO7p0+IKNtkMF2j5hoFVC7Tp3bdQrGQKBgQD7HX1TzaVmlggLih2s\n" \
+"XqCthU3T92YiNL/51UXLzWMPMMnhwO0b5a2AMZGU1g6BJ8LZ6FTK0BPf+Z2Ie+uN\n" \
+"yox66gbXMWM/2DVEQHdepI7kU7QICqYAsUowlIhdnbsS5H6/j1SUZ3gXhrMQYZ0S\n" \
+"ekS6Va3EWT+AhmfYENo+S6BVIwKBgQDfo87kT4bkngytLNx8iVlvtBz3wdCrcHQK\n" \
+"FHSccD8GbeEgVU5sD3V+KMcabgCWRz+XgbtZkC3Q3rVDwwocQV6WaVUAr1KR4w/0\n" \
+"Ub0g3f5bhvM1dt2hdLO3AP+kvFuiTejnW2CjzNdfJLROOH/W6nZnaeczA8kEXXIC\n" \
+"Sv+Pyk4VuQKBgQCUEgt4guZo20bbJxHgNdwg9V2zA0qiGOCqfGuvhOhIaMhh6dTm\n" \
+"gkQQNypUzPO4jK2EuE5nWNKfWxzdAdUfwrObNqvZ8DFJ0D94g1rf38CyOfkKVN0V\n" \
+"w3SvuKXALeXFeh6S7f09lNVnafHkUuq/noEwLp1MDiQ3sQlCio1l9koQaQKBgCJG\n" \
+"PKMI/Sd0gYTY50G+2xIfjID8FzrvFRmmYOjI2x/lHyeRa19sTxlyrnECgtyFNt3F\n" \
+"aC0lx5/HQgiMj7Qc4J40rm5YcFMjdYKANHghDaaBXCzJdtYTyKc3Y/afV3vcbOFo\n" \
+"Q7tW3XsbaPbD+fO6I0NeG6zZ26jrmVl4nQowex8hAoGAG4gjIjjmaTlNof8xjDiT\n" \
+"kEj6uZDfaV/aaYNPv3Tty8rKlDWOWBksx7h+N1IIwpbseu6n9Czcnoqn7Pk05VfW\n" \
+"OXkqIfE1UthAE3YtUAv3c3Zz1dLV0MNXtntFnpShntMUdOxvwT65xQVp4dYHJ2Rd\n" \
+"Iqvpz0Y+/ekM2SapZ4nrPyo=\n" \
+"-----END PRIVATE KEY-----";
 
 const char* topic = "test/"; // CHANGE SensorID here!
 char output[128];
@@ -149,8 +158,11 @@ void wifi_connect()
       delay(10);
       WiFi.setHostname(HOSTNAME);
       WiFi.mode(WIFI_STA);
+      // Configures static IP address
+      if (!WiFi.config(local_IP, gateway, subnet, primaryDNS)) {
+        Serial.println("STA Failed to configure");
+      }
       WiFi.begin(ssid, pass);
-      //WiFi.config(IPAddress(ip_static), IPAddress(ip_gateway), IPAddress(ip_subnet), IPAddress(ip_dns));
 
       int Attempt = 0;
       while (WiFi.status() != WL_CONNECTED) {

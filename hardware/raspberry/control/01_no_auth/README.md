@@ -42,7 +42,7 @@ You can access grafana by the following URL: http://192.168.88.100:3000/grafana
 import paho.mqtt.client as mqtt
 import sys
 HOST = '192.168.88.100'
-PORT = 1884
+PORT = 1883
 
 CLIENT_ID='microfab_client'
 

@@ -221,7 +221,20 @@ openssl crl -in ./certs_issued/crl/rootca.crl.pem -text -noout
 
 openssl crl -in ./certs_issued/crl/rootca.crl.pem -outform DER -out ./certs_issued/crl/rootca.crl
 
+
+openssl x509 -in mqtt-client.cert.pem -text -certopt no_header,no_pubkey,no_subject,no_issuer,no_signame,no_version,no_serial,no_validity,no_extensions,no_sigdump,no_aux,no_extensions > pre-mqtt-client.cert.txt
+sed 's/^/"/; s/$/\\n" \\/' pre-mqtt-client.cert.txt > mqtt-client.cert.txt
+
+cat mqtt-client.key.pem > pre-mqtt-client.key.txt
+sed 's/^/"/; s/$/\\n" \\/' pre-mqtt-client.key.txt > mqtt-client.key.txt
+
+openssl x509 -in cacert.pem -text -certopt no_header,no_pubkey,no_subject,no_issuer,no_signame,no_version,no_serial,no_validity,no_extensions,no_sigdump,no_aux,no_extensions > pre-cacert.txt
+sed 's/^/"/; s/$/\\n" \\/' pre-cacert.txt > cacert.txt
+
+rm pre-*
+
 mv mqtt* certs_issued/mqtt/
+mv cacert.txt certs_issued/mqtt/
 mv opc* certs_issued/opc/
 mv influx* certs_issued/influxdb/
 mv grafana* certs_issued/grafana/
