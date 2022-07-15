@@ -89,6 +89,6 @@
   ## tags              - extra tags to be added to the output metric (optional)
   ## Example:
   nodes = [
-      {name="Sample", namespace="2", identifier_type="i", identifier="MyObject"}
+      {name="Sample", namespace="2", identifier_type="i", identifier="2"}
   ]
 
