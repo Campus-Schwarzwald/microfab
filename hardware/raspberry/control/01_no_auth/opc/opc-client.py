@@ -9,8 +9,6 @@ from asyncua import Client, Node, ua
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger('asyncua')
 
-_logger.info('ACTUAL WORKING DIRECTORY: {}'.format(os.getcwd()))
-
 async def main():
     url = 'opc.tcp://10.100.13.67:4840/freeopcua/server/'
     # url = 'opc.tcp://commsvr.com:51234/UA/CAS_UA_Server'
@@ -105,6 +103,7 @@ async def read_data(url):
 async def run_loop_forever(url):
     n = 0
     time_sleep = 4
+    _logger.info('ACTUAL WORKING DIRECTORY: {}'.format(os.getcwd()))
     # await get_node_tree(url)
     while True:
         n = n + 1
