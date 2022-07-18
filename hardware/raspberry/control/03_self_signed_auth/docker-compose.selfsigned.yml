@@ -39,6 +39,7 @@ services:
         depends_on:
             - influxdb
         env_file: selfsigned.env
+        user: "888"
         ports:
             - '8125:8125'
         volumes:
