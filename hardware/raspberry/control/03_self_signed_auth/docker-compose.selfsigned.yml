@@ -42,6 +42,7 @@ services:
         user: "888"
         ports:
             - '8125:8125'
+        restart: always
         volumes:
             - ./certs/telegraf:/etc/telegraf
             - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
