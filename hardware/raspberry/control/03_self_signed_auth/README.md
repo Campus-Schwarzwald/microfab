@@ -90,6 +90,7 @@ This requires subjects which has some hard-coded information in the script.
 
     ```bash
         sudo chown -R 472:472 certs/grafana/
+        sudo chown -R 888:888 certs/telegraf/
     ```
 
 5. Bring the Stack up:

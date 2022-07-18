@@ -78,10 +78,10 @@
 
   ## Security policy, one of "None", "Basic128Rsa15", "Basic256",
   ## "Basic256Sha256", or "auto"
-  security_policy = "Basic256Sha256"
+  security_policy = "auto"
 
   ## Security mode, one of "None", "Sign", "SignAndEncrypt", or "auto"
-  security_mode = "SignAndEncrypt"
+  security_mode = "auto"
 
   ## Authentication Method, one of "Certificate", "UserName", or "Anonymous".  To
   ## authenticate using a specific ID, select 'Certificate' or 'UserName'
