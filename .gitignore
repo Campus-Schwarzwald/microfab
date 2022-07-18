@@ -1,2 +1,11 @@
-hardware/raspberry/control/03_self_signed_auth/certs/certs_issued/*
-hardware/raspberry/control/03_self_signed_auth/certs/remote_certs/*
+hardware/raspberry/control/03_self_signed_auth/certs/certs_issued/
+hardware/raspberry/control/03_self_signed_auth/certs/remote_certs/
+
+hardware/raspberry/control/04_pki_auth/certs/remote_certs/
+hardware/raspberry/control/04_pki_auth/certs/certs_issued/
+
+*.pem
+*.der
+*.p12
+
+

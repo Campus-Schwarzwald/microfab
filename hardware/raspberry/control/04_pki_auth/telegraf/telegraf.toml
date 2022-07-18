@@ -1,0 +1,114 @@
+[agent]
+    interval = "20s"
+    round_interval = true
+    metric_batch_size = 1000
+    metric_buffer_limit = 10000
+    collection_jitter = "0s"
+    flush_interval = "10s"
+    flush_jitter = "0s"
+    precision = ""
+    debug = true
+    quiet = false
+    hostname = ""
+    omit_hostname = false
+
+#############################################################
+#                   OUTPUT PLUGINS                          #
+#############################################################
+[[outputs.influxdb_v2]]
+
+    urls = [ "http://influxdb:8086" ]
+    token = "${INFLUX_TOKEN}"
+    organization = "${DOCKER_INFLUXDB_INIT_ORG}"
+    bucket = "${DOCKER_INFLUXDB_INIT_BUCKET}"
+
+    timeout = "5s"
+
+
+##################################################################
+#                   INPUT PLUGINS                                #
+##################################################################
+
+[[inputs.mqtt_consumer]]
+
+    servers = [ "ssl://mosquitto:8883" ]
+
+    # Topics to subscribe to:
+    topics = [
+        "test/#"
+    ]
+
+    # Connection timeout
+    connection_timeout = "30s"
+
+    username = "${TG_MOSQUITTO_USERNAME}"
+    password = "${TG_MOSQUITTO_PASSWORD}"
+
+    ## Use TLS but skip chain & host verification
+    # Use Certificates if `require_certificate true` in `mosquitto.conf` file
+    tls_ca = "/etc/telegraf/cacert.pem"
+    tls_cert = "/etc/telegraf/mqtt-client.cert.pem"
+    tls_key = "/etc/telegraf/mqtt-client.key.pem"
+    ## Use TLS but skip chain & host verification
+    insecure_skip_verify = true
+
+    data_format = "json"
+
+[[inputs.ping]]
+  # urls to ping
+  urls = ["192.168.88.1"] # required
+  # number of pings to send (ping -c <COUNT>)
+  count = 1 # required
+  # interval, in s, at which to ping. 0 == default (ping -i <PING_INTERVAL>)
+  ping_interval = 0.0
+  # ping timeout, in s. 0 == no timeout (ping -t <TIMEOUT>)
+  timeout = 0.0
+  # interface to send ping from (ping -I <INTERFACE>)
+  interface = ""
+
+[[inputs.opcua]]
+  ## Metric name
+  name = "opcua"
+  #
+  ## OPC UA Endpoint URL
+  endpoint = "opc.tcp://192.168.88.101:4840"
+
+  ## Maximum time allowed to establish a connect to the endpoint.
+  connect_timeout = "30s"
+
+  ## Security policy, one of "None", "Basic128Rsa15", "Basic256",
+  ## "Basic256Sha256", or "auto"
+  security_policy = "auto"
+
+  ## Security mode, one of "None", "Sign", "SignAndEncrypt", or "auto"
+  security_mode = "auto"
+
+  ## Authentication Method, one of "Certificate", "UserName", or "Anonymous".  To
+  ## authenticate using a specific ID, select 'Certificate' or 'UserName'
+  auth_method = "Certificate"
+
+  ## Path to cert.pem. Required when security mode or policy isn't "None".
+  ## If cert path is not supplied, self-signed cert and key will be generated.
+  certificate = "/etc/telegraf/opc-client.cert.pem"
+  #
+  ## Path to private key.pem. Required when security mode or policy isn't "None".
+  ## If key path is not supplied, self-signed cert and key will be generated.
+  private_key = "/etc/telegraf/opc-client.key.pem"
+
+  ## Option to select the metric timestamp to use. Valid options are:
+  ##     "gather" -- uses the time of receiving the data in telegraf
+  ##     "server" -- uses the timestamp provided by the server
+  ##     "source" -- uses the timestamp provided by the source
+  timestamp = "gather"
+
+  ## Node ID configuration
+  ## name              - field name to use in the output
+  ## namespace         - OPC UA namespace of the node (integer value 0 thru 3)
+  ## identifier_type   - OPC UA ID type (s=string, i=numeric, g=guid, b=opaque)
+  ## identifier        - OPC UA ID (tag as shown in opcua browser)
+  ## tags              - extra tags to be added to the output metric (optional)
+  ## Example:
+  nodes = [
+      {name="Sample", namespace="2", identifier_type="i", identifier="2"}
+  ]
+

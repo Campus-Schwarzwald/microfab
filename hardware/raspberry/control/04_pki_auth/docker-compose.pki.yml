@@ -1,0 +1,87 @@
+version: "3"
+
+services:
+    influxdb:
+        image: influxdb:latest
+        container_name: influxdb
+        env_file: pki.env
+        ports:
+            - '8086:8086'
+        volumes:
+            - ./certs/influxdb:/etc/ssl/influxdb
+            - influxdb_data:/var/lib/influxdb
+        networks: 
+            - "iotstack"
+
+    mosquitto:
+        image: eclipse-mosquitto:latest
+        container_name: mosquitto
+        ports:
+            - '8883:8883'
+            - '8884:8884'
+        volumes:
+            - ./certs/mqtt:/mosquitto/config/certs
+            - ./mosquitto/config:/mosquitto/config
+            - ./mosquitto/log:/mosquitto/log
+            - ./mosquitto/data:/mosquitto/data
+        user: "${USER_ID}:${GRP_ID}"
+        links: 
+            - telegraf
+        restart: always
+        networks: 
+            - "iotstack"
+    
+    telegraf:
+        image: telegraf:latest
+        container_name: telegraf
+        links: 
+            - influxdb
+        depends_on:
+            - influxdb
+        env_file: pki.env
+        user: "888"
+        ports:
+            - '8125:8125'
+        restart: always
+        volumes:
+            - ./certs/telegraf:/etc/telegraf
+            - ./telegraf/telegraf.toml:/etc/telegraf/telegraf.conf:ro
+        networks: 
+            - "iotstack"
+    
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        env_file: pki.env
+        user: "472"
+        ports:
+            - '3000:3000'
+        links: 
+            - influxdb
+        volumes: 
+            - grafana_data:/var/lib/grafana
+            - ./certs/grafana:/etc/ssl/certs
+        networks: 
+            - "iotstack"
+
+    opc-client:
+        build: opc
+        container_name: opc-client
+        restart: always
+        volumes:
+            - ./certs/opc:/app/certs
+        links:
+            - telegraf
+        ports:
+            - "8000:8000"
+        networks:
+            - "iotstack"
+
+
+volumes: 
+    influxdb_data:
+    grafana_data:
+
+networks: 
+    iotstack:
+        external: true
