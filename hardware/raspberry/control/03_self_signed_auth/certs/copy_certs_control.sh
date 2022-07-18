@@ -20,8 +20,8 @@ mkdir remote_certs/influxdb
 cp -r ./certs_issued/influxdb/* ./remote_certs/influxdb/
 
 mkdir remote_certs/telegraf
-cp -r ./certs_issued/mqtt/* ./remote_certs/telegraf/
-cp -r ./certs_issued/opc/* ./remote_certs/telegraf/
+#cp -r ./certs_issued/mqtt/* ./remote_certs/telegraf/
+#cp -r ./certs_issued/opc/* ./remote_certs/telegraf/
 rm ./remote_certs/telegraf/mqtt-client.key*
 rm ./remote_certs/telegraf/opc-server.key*
 
