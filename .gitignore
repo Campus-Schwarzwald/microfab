@@ -9,3 +9,4 @@ hardware/raspberry/control/04_pki_auth/certs/certs_issued/
 *.p12
 
 
+!/.gitignore
