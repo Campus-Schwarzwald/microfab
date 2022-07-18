@@ -46,9 +46,9 @@
 
     ## Use TLS but skip chain & host verification
     # Use Certificates if `require_certificate true` in `mosquitto.conf` file
-    tls_ca = "/etc/telegraf/mqtt/cacert.pem"
-    tls_cert = "/etc/telegraf/mqtt/mqtt-client.cert.pem"
-    tls_key = "/etc/telegraf/mqtt/mqtt-client.key.pem"
+    tls_ca = "/etc/telegraf/cacert.pem"
+    tls_cert = "/etc/telegraf/mqtt-client.cert.pem"
+    tls_key = "/etc/telegraf/mqtt-client.key.pem"
     ## Use TLS but skip chain & host verification
     insecure_skip_verify = true
 
@@ -89,11 +89,11 @@
 
   ## Path to cert.pem. Required when security mode or policy isn't "None".
   ## If cert path is not supplied, self-signed cert and key will be generated.
-  certificate = "/etc/telegraf/opc/opc-client.cert.pem"
+  certificate = "/etc/telegraf/opc-client.cert.pem"
   #
   ## Path to private key.pem. Required when security mode or policy isn't "None".
   ## If key path is not supplied, self-signed cert and key will be generated.
-  private_key = "/etc/telegraf/opc/opc-client.key.pem"
+  private_key = "/etc/telegraf/opc-client.key.pem"
 
   ## Option to select the metric timestamp to use. Valid options are:
   ##     "gather" -- uses the time of receiving the data in telegraf
