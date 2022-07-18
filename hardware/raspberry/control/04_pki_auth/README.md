@@ -1,114 +1,118 @@
-# Required certificates
+# PKI Case
+      
+The __PKI__ Case generates necessary Certificates in order to provide __TLS__ Security for components. This case
+adds upon the __Self Signed__ Case by adding more security.
 
-## Naming convention
 
-- A root, self-signed certificate and corresponding private keys in encrypted PEM format
-  - ca_root.cert.pem
-  - ca_root.key.pem
+## Environment Variables & Configuration Files
 
-- A server certificate and corresponding private keys in encrypted PEM format issued by ca_root.cert.pem and used by the server (e.g. Mosquitto Broker)
-  - <NAME OF THE SERVER>-server.cert.pem
-  - <NAME OF THE SERVER>-server.key.pem
+## Steps to Bring the Stack Up
 
-A client certificate and corresponding private key in encrypted PEM format issued by ca_root.cert.pem and used by the client (e.g. Mosquitto Client)
-  - <NAME OF THE CLIENT>-client.cert.pem
-  - <NAME OF THE CLIENT>-client.key.pem
+1. Create a network for your stack:
 
-## Structure
+        docker network create iotstack
 
-    certs/
-    ├── ca_root.cert.pem
-    ├── ca_root.key.pem
-    ├── ca_root.cert.srl
-    ├── grafana
-    │   ├── ca_root.cert.pem
-    │   ├── grafana-server.cert.pem
-    │   ├── grafana-server.cert.csr
-    │   └── grafana-server.key.pem
-    ├── influxdb
-    │   ├── ca_root.cert.pem
-    │   ├── influx-server.cert.pem
-    │   ├── influx-server.cert.csr
-    │   └── influx-server.key.pem
-    └── mqtt
-    │   ├── ca_root.cert.pem
-    │   ├── mqtt-client.cert.pem
-    │   ├── mqtt-client.cert.csr
-    │   ├── mqtt-client.key.pem
-    │   ├── mqtt-server.cert.pem
-    │   ├── mqtt-server.cert.csr
-    │   ├── mqtt-server.key.pem
-    └── opc
-        ├── ca_root.cert.pem
-        ├── opc-client.cert.pem
-        ├── opc-client.cert.csr
-        ├── opc-client.key.pem
-        ├── opc-server.cert.pem
-        ├── opc-server.cert.csr
-        ├── opc-server.key.pem
+2. Encrypting the Passwords for Mosquitto Broker:
+    ```bash
+        docker run -it --rm -v $(pwd)/mosquitto/config:/mosquitto/config eclipse-mosquitto mosquitto_passwd -U /mosquitto/config/passwd
+    ```
 
-## OPC & MQTT Profiles
+    If there is no response from the command, the passwords are encrypted. You can see the encrypted passwords using:
 
-### Certificate Profiles
+        cat mosquitto/config/passwd
 
-**Key Algorithm**: RSA
-**Bit Length**: 2048
-**Key Usage**: Digital Signature, Key encipherment
-**Extended Key Usage**: Client Authentication, Server Authentication
+4. change the Ownership for the Grafana and Telegraf Certificates using:
 
-### End Entity Profiles
+    ```bash
+        sudo chown -R 472:472 certs/grafana/
+        sudo chown -R 888:888 certs/telegraf/
+    ```
 
-#### Server
-**CN**: 192.168.88.100
-**OU**: HackTheFab
-**O**: Campus Schwarzwald
-**C**: DE
-**Token**: P12 file
+5. Bring the Stack up:
 
-#### Client
-**CN**: ??
-**OU**: HackTheFab
-**O**: Campus Schwarzwald
-**C**: DE
-**Token**: P12 file
+        docker-compose -f docker-compose.pki.yml up 
 
-## InfluxDB
-### Certificate Profiles
+6. For your MQTT Clients copy the `ca-chain.cert.pem`, `mqtt-client.cert.pem`, and `mqtt-client.key.pem` and add them to your Apps accordingly.
+   
+   All files which are needed to setup the ESP32 can be found [here](microfab/hardware/esp/04_pki_auth).
 
-**Key Algorithm**: RSA
-**Bit Length**: 2048
-**Key Usage**: Digital Signature, Key encipherment
-**Extended Key Usage**: Client Authentication, Server Authentication
+7. Same for OPC: Distribute `opc-server.cert.der` and `opc-server.key.pem` to the Sensor Nodes
 
-### End Entity Profiles
 
-**CN**: 192.168.88.100
-**OU**: HackTheFab
-**O**: Campus Schwarzwald
-**C**: DE
-**Token**: P12 file
+### Typical MQTT Client Configuration
 
-## Grafana
-### Certificate Profiles
+| Conf | Value                                                              |
+|------|--------------------------------------------------------------------|
+| Host | <IP_Address>                                                       |
+| Port | 8883                                                               |
+| User | `pubclient`                                                        |
+| TLS  | `v1.2`                                                             |
+| Pass | `microfoo123`                                                      |
+| cert | `ca-chain.cert.pem`, `mqtt-client.cert.pem`, `mqtt-client.key.pem` |
 
-**Key Algorithm**: RSA
-**Bit Length**: 2048
-**Key Usage**: Digital Signature, Key encipherment
-**Extended Key Usage**: Client Authentication, Server Authentication
 
-### End Entity Profiles
+## Test the Broker using Paho-MQTT-Python 
 
-**CN**: 192.168.88.100
-**OU**: HackTheFab
-**O**: Campus Schwarzwald
-**C**: DE
-**Token**: P12 file
+- if `mosquitto.conf` has `require_certificates true` then the following code will work:
 
-## Additional
+- Define the path to you selfsigned certificates.
 
-- Public Key is a subset of the Private Key (for RSA) = often called key pair
-- A certificate is a signed object (X.509)
-- Most certificates contain the public key and an identity (owner of the key)
-- Certificate is often used in terms of PKCS#12 / PFX files which contains the certificate and the private key
-- There are no private or public certificates
-- 
+```python
+import ssl
+import sys
+import paho.mqtt.client as mqtt
+
+
+BROKER = '192.168.88.100'
+PORT = 8884
+
+CA_CERT_FILE = 'path/to/pki_cert/ca.crt'
+CERT_FILE = 'path/to/pki_cert/mqtt-client.crt'
+KEY_FILE = 'path/to/pki_cert/mqtt-client.key'
+TOPIC = 'test/test'
+
+def on_connect(mqttc, obj, flags, rc):
+    print("rc: "+str(rc))
+
+def on_message(mqttc, obj, msg):
+    print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
+
+def on_publish(mqttc, obj, mid):
+    print("mid: "+str(mid))
+
+def on_subscribe(mqttc, obj, mid, granted_qos):
+    print("Subscribed: "+str(mid)+" "+str(granted_qos))
+
+def on_log(mqttc, obj, level, string):
+    print(string)
+
+
+
+# Create Client with Websockets transport
+mqttc = mqtt.Client('microfab-selfsigned-ws', transport='websockets')
+
+mqttc.tls_set(ca_certs=CA_CERT_FILE,certfile=CERT_FILE,keyfile=KEY_FILE,tls_version=ssl.PROTOCOL_TLSv1_2)
+mqttc.tls_insecure_set(True) # for Self-Signed Certificates
+
+
+mqttc.on_message = on_message
+mqttc.on_connect = on_connect
+mqttc.on_publish = on_publish
+mqttc.on_subscribe = on_subscribe
+# Uncomment to enable debug messages
+mqttc.on_log = on_log
+mqttc.connect(BROKER, PORT, 60)
+mqttc.subscribe(TOPIC, 0)
+
+
+try:
+    mqttc.loop_forever()
+except KeyboardInterrupt as e:
+    print('CTRL+C Pressed')
+    mqttc.loop_stop()
+    mqttc.disconnect()
+    sys.exit()
+
+```
+
+       
