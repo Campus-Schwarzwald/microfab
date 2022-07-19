@@ -1,6 +1,21 @@
 # Coder Challenge
 
-## Additional Questions
+- Find unencrypted OPC UA and / or MQTT traffic with a tool of your choice (e.g. Wireshark)
+
+- Implement certificate based Authentication / Encryption for the Microfab
+
+- Implement a QoS for the MQTT client higher than 0
+
+## PKI implementation
+- Get certificates (OPC, MQTT, Grafana, InfluxDB) from our PKI and transform the .p12 file in the proper format / files:
+  - certificate (.pem and .der format)
+  - key (.pem)
+  - root CA certificate (chain)
+
+- Implement the certificates in the MQTT client, OPC UA Server and Microfab Control
+
+
+## Additional Questions / Challenges
 
 - What are low-hanging fruits for a cyber attacker if he wants to get access to our system?
   - What can be done to mitigate them?
@@ -41,3 +56,5 @@
 - Use secure (not microfoo123 :D) passwords for authentication
 
 - Implement a proxy in Microfab Control
+
+- Show a Grafana Dashboard on the inbuilt Screen.

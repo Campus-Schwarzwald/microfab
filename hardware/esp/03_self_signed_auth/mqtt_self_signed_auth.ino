@@ -1,10 +1,13 @@
+//===========================================================================
+//       MQTT client with self signed certificates
+//===========================================================================
+
 #include <WiFi.h>
 //#include <WiFiClientSecure.h>  //included WiFiClientSecure does not work!
 #include "src/dependencies/WiFiClientSecure/WiFiClientSecure.h" //using older WiFiClientSecure
 #include <time.h>
 #include <PubSubClient.h>
 #include<ArduinoJson.h>
-
 
 const char ssid[] = "Microfab_002";
 const char pass[] = "8UcXxXCF";

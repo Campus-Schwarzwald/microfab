@@ -12,13 +12,24 @@ The data is stored on the edge device and can be visualized afterwards.
 ### Hardware
 
 - Raspberry Pi 4B
+- Raspberry Zero W1
 - Espressif ESP32 microcontroller
 - WiFi Router
 
-### Software
+### Software 
+
+#### ... implemented in Microfab
 
 - Raspberry Pi OS Lite 64bit
+- Raspberry Pi OS Lite 32bit
 - Arduino IDE to program the ESP32
+
+#### ... required for coding
+
+- A Python IDE (e.g. Pycharm)
+- Arduino IDE
+- Git
+- Terminal
 
 ## Microfab Control
 

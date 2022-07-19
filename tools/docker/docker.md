@@ -23,3 +23,8 @@ remove a conatiner
 rebuild an existing conatiner
 
     docker-compose -f docker-compose<...> up --build opc-client
+
+Show all running containers
+
+    docker-compose -f docker-compose.pki.yml  ps --services --filter "status=running"
+

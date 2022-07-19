@@ -221,6 +221,10 @@ openssl crl -in ./certs_issued/crl/rootca.crl.pem -text -noout
 
 openssl crl -in ./certs_issued/crl/rootca.crl.pem -outform DER -out ./certs_issued/crl/rootca.crl
 
+echo -e "
+#===========================================================================
+#       Generating Text Files
+# ===========================================================================\n"
 
 openssl x509 -in mqtt-client.cert.pem -text -certopt no_header,no_pubkey,no_subject,no_issuer,no_signame,no_version,no_serial,no_validity,no_extensions,no_sigdump,no_aux,no_extensions > pre-mqtt-client.cert.txt
 sed 's/^/"/; s/$/\\n" \\/' pre-mqtt-client.cert.txt > mqtt-client.cert.txt
