@@ -44,7 +44,7 @@ This requires subjects which has some hard-coded information in the script.
 
     b. This should create the following certificates and keys in the `certs` folder:
 
-                issuedcerts/
+                issued_certs/
                 ├── ca.crt
                 ├── ca.key
                 ├── ca.srl

@@ -1,8 +1,12 @@
 # Coder Challenge
 
+> Security at its best: Whenever a password is needed, **microfoo123** is the right choice.  
+
 - Find unencrypted OPC UA and / or MQTT traffic with a tool of your choice (e.g. Wireshark)
 
-- Implement certificate based Authentication / Encryption for the Microfab
+- Implement certificate based (self signed) Authentication / Encryption for the Microfab
+  - `microfab/challenges/coder_challenge/GenerateSelfSignedCert.md` explains how to generate certificates and keys
+  - `microfab/challenges/coder_challenge/FormatMqttCertificate.md` shows how to format the key and certificates for the MQTT client
 
 - Implement a QoS for the MQTT client higher than 0
 
@@ -11,11 +15,14 @@
   - certificate (.pem and .der format)
   - key (.pem)
   - root CA certificate (chain)
+  - `microfab/challenges/coder_challenge/ConvertP12.md` shows how to extract the keys and certificates 
 
 - Implement the certificates in the MQTT client, OPC UA Server and Microfab Control
 
 
-## Additional Questions / Challenges
+### Additional Questions / Challenges
+
+#### Questions
 
 - What are low-hanging fruits for a cyber attacker if he wants to get access to our system?
   - What can be done to mitigate them?
@@ -47,7 +54,7 @@
 - Why is it a good idea to implement a proxy between a server / client connection?
 
 
-## Additional technical challenges
+#### Technical challenges
 
 - Implement Flash Encryption on the ESP32
 
