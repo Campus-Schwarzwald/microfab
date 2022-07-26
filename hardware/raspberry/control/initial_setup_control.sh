@@ -30,6 +30,9 @@ sudo apt-get update
 echo -e "\nupgrading ..."
 sudo apt-get upgrade -y
 
+echo -e "\ninstalling tcpdump ..."
+sudo apt-get install tcpdump -y
+
 echo -e "\ninstalling git ..."
 sudo apt install git -y
 

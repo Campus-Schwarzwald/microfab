@@ -29,6 +29,9 @@
                 - client.key
                 - ca.crt
 
+> When working with certificates and keys you need to put them in the right format. 
+> `microfab/hardware/control/04_pki_auth/ArduinoFormatMqttCerts.sh` puts the certificates in the right format to copy paste them in the .ino file
+
 Sources:
 - https://www.emqx.com/en/blog/esp32-connects-to-the-free-public-mqtt-broker
 - https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/
