@@ -10,5 +10,3 @@ hardware/raspberry/control/04_pki_auth/certs/certs_issued/
 
 
 !/.gitignore
-!/hardware/raspberry/control/04_pki_auth/certs/p12_to_pem.sh
-!/hardware/raspberry/control/03_self_signed_auth/certs/generate_certs.sh
