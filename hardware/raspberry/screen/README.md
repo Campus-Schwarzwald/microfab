@@ -15,11 +15,6 @@ Steps:
 
     sudo nano /boot/config.txt
 
-- Create a ssh file
-
-
-    touch /boot/ssh
-
 - Insert the following code
 
 
@@ -34,17 +29,6 @@ Steps:
 
     
     ssh pi@raspberrypi.local
-
-- Unblock wifi
-
-
-    rfkill unblock 0
-
-- Configure your Wifi
-
-
-    sudo raspi-config
-        System options --> Wireless LAN
 
 
 ## Browser configuration

@@ -11,7 +11,8 @@
 # Welcome message
 echo -e "
 This will prepare the Raspberry Pi for further installations.
-It will take about 20 minutes to compile on the Raspberry Pi.\n"
+It will take about 15 minutes to compile on the Raspberry Pi.\n
+The Pi will reboot after setup\n"
 
 # Prompt to continue
 read -p "  Continue? (y/n) " ans
@@ -70,10 +71,11 @@ wireless-power off
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 echo -e "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n"
 
-read -p "  The Pi needs to reboot. Do you want to reboot? (y/n) " ans
-if [[ $ans != "n" ]]; then
-  echo -e "\nRebooting...\n"
-  sudo reboot
-  exit
-fi
-echo
+
+echo -e "\ncloning the repo for the screen"
+git clone https://github.com/waveshare/LCD-show.git
+
+echo -e "\nsetup the screen"
+cd LCD-show/
+sudo ./LCD5-show lite 180
+cd ..
