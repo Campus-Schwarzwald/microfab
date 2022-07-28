@@ -13,7 +13,6 @@ cd /home/pi/microfab/hardware/raspberry/control/01_no_auth
 ``` bash
 docker network create iotstack
 ```
-        
 
 3. Bring the stack up:
 
@@ -25,6 +24,7 @@ docker-compose -f docker-compose.no_auth.yml up
 
 4. All files which are needed to setup the ESP32 can be found [here](/hardware/esp/01_no_auth).
 
+5. For setting up the OPC UA Server find all files [here](/hardware/raspberry/opc_server/01_no_auth).
 
 
 ##  Ports
