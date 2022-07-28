@@ -2,15 +2,28 @@
 
 ## Steps to bring the  Stack Up
 
-1. Create a network for your stack:
+1. Change directory
 
-        docker network create iotstack
+``` bash
+cd /home/pi/microfab/hardware/raspberry/control/01_no_auth
+```
 
-2. Bring the stack up:
+2. Create a network for your stack:
 
-        docker-compose -f docker-compose.no_auth.yml up
+``` bash
+docker network create iotstack
+```
+        
 
-3. All files which are needed to setup the ESP32 can be found [here](/hardware/esp/01_no_auth).
+3. Bring the stack up:
+
+``` bash
+docker-compose -f docker-compose.no_auth.yml up
+
+# -d to start docker in the background
+```
+
+4. All files which are needed to setup the ESP32 can be found [here](/hardware/esp/01_no_auth).
 
 
 
