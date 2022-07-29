@@ -7,8 +7,8 @@
 #include <PubSubClient.h>
 #include<ArduinoJson.h>
 
-const char ssid[] = "Microfab_01";
-const char pass[] = "microfoo123";
+const char ssid[] = "Microfab_005";
+const char pass[] = "Z3cRz2ua";
 
 #define HOSTNAME "arduinoClient"
 IPAddress server(192, 168, 88, 100);

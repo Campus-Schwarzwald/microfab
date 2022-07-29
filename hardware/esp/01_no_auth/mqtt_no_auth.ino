@@ -21,8 +21,6 @@ IPAddress primaryDNS(8, 8, 8, 8);
 const char *MQTT_HOST = "192.168.88.100";
 const int MQTT_PORT = 1883;
 
-
-
 const char* topic = "test/";
 char output[128];
 time_t now;
