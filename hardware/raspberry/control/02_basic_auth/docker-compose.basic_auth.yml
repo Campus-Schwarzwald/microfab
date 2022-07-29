@@ -14,7 +14,7 @@ services:
             - "iotstack"
 
     mosquitto:
-        image: eclipse-mosquitto:1.6
+        image: eclipse-mosquitto:latest
         container_name: mosquitto
         volumes: 
             - ./mosquitto/config/:/mosquitto/config/
@@ -34,7 +34,7 @@ services:
             - "iotstack"
     
     telegraf:
-        image: telegraf:1.16
+        image: telegraf:latest
         container_name: telegraf
         restart: always
         links: 
@@ -48,13 +48,13 @@ services:
             - "iotstack"
     
     grafana:
-        image: grafana/grafana:7.1.0
+        image: grafana/grafana:latest
         container_name: grafana
         env_file: basic_auth.env
-        restart: always
-        user: "472"
         ports:
             - '3000:3000'
+        restart: unless-stopped
+        user: "472"
         links: 
             - influxdb
         volumes: 
@@ -65,12 +65,15 @@ services:
     opc-client:
         build: opc
         container_name: opc-client
-        privileged: true
         restart: always
         links:
             - telegraf
         ports:
             - "8000:8000"
+        networks:
+            - "iotstack"
+        volumes:
+            - ./:/client
 
 volumes: 
     influxdb2:

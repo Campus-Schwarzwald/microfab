@@ -20,7 +20,7 @@ However, recent events show that the sole use of user:password carries high risk
 2. Go to directory
 
 
-      cd microfab/hardware/raspberry/02_basic_auth/
+      cd microfab/hardware/raspberry/control/02_basic_auth/
 
 4. Create and encrypt the passwords for Mosquitto broker:
 
