@@ -10,7 +10,7 @@ _logger = logging.getLogger('asyncua')
 
 
 async def main():
-    url = 'opc.tcp://10.100.13.67:4840/freeopcua/server/'
+    url = 'opc.tcp://192.168.88.101:4840/freeopcua/server/'
     # url = 'opc.tcp://commsvr.com:51234/UA/CAS_UA_Server'
     async with Client(url=url) as client:
         # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects
@@ -79,6 +79,8 @@ async def get_node_tree(url):
 async def read_data(url):
     try:
         client = Client(url=url)
+        client.set_user('Admin')
+        client.set_password('ThisIsNotSecure')
         await client.connect()
         uri = 'http://examples.freeopcua.github.io'
         idx = await client.get_namespace_index(uri)

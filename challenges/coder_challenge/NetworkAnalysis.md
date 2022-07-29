@@ -62,7 +62,7 @@
    MAC Address: 94:B9:7E:D6:0D:48 (Espressif)
     ```
 
-4. Getting hte OS & services
+4. Getting the OS & services
 
     ```bash
     nmap -A 192.168.88.100 
