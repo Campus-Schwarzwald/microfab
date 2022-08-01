@@ -19,7 +19,7 @@ async def main():
     _logger = logging.getLogger('microfab_opc_self_signed')
     # setup our server
     cert_user_manager = CertificateUserManager()
-    await cert_user_manager.add_user("/home/pi/build/certs/self_signed/opc-client.cert.der", name='microfab_opc_client')
+    await cert_user_manager.add_user("/home/pi/build/certs/self_signed/opc-client.cert.pem", name='microfab_opc_client')
 
     server = Server()
     await server.init()

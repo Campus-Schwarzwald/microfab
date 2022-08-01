@@ -9,8 +9,8 @@
 #include <PubSubClient.h>
 #include<ArduinoJson.h>
 
-const char ssid[] = "Microfab_002";
-const char pass[] = "8UcXxXCF";
+const char ssid[] = "Microfab_005";
+const char pass[] = "Z3cRz2ua";
 
 #define HOSTNAME "192.168.88.100"
 
