@@ -89,8 +89,8 @@ This requires subjects which has some hard-coded information in the script.
 4. change the Ownership for the Grafana Server Certificates using:
 
     ```bash
-        sudo chown -R 472:472 certs/grafana/
-        sudo chown -R 888:888 certs/telegraf/
+        sudo chown -R 472:472 certs/certs_issued/grafana/
+        sudo chown -R 888:888 certs/certs_issued/telegraf/
     ```
 
 5. Bring the Stack up:

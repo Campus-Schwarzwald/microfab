@@ -9,9 +9,9 @@ from asyncua.crypto.security_policies import SecurityPolicyBasic256Sha256
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger('asyncua')
 
-cert = f"/app/certs/opc-client.cert.der"
+cert = f"/app/certs/opc-client.cert.pem"
 private_key = f"/app/certs/opc-client.key.pem"
-server_cert = f"/app/certs/opc-server.cert.der"
+server_cert = f"/app/certs/opc-server.cert.pem"
 
 async def main():
     url = 'opc.tcp://192.168.88.101:4840/freeopcua/server/'
