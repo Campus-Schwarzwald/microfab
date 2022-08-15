@@ -24,7 +24,7 @@ async def main():
     server = Server()
     await server.init()
 
-    server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
+    server.set_endpoint("opc.tcp://0.0.0.0:4843/freeopcua/server/")
     server.set_server_name("Microfab OPC UA Server")
     server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt],
                                permission_ruleset=SimpleRoleRuleset())

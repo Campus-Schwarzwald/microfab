@@ -14,7 +14,7 @@ private_key = f"/app/certs/opc-client.key.pem"
 server_cert = f"/app/certs/opc-server.cert.pem"
 
 async def main():
-    url = 'opc.tcp://192.168.88.101:4840/freeopcua/server/'
+    url = 'opc.tcp://192.168.88.101:4843/freeopcua/server/'
     # url = 'opc.tcp://commsvr.com:51234/UA/CAS_UA_Server'
     async with Client(url=url) as client:
         # Client has a few methods to get proxy to UA nodes that should always be in address space such as Root or Objects

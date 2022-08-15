@@ -73,7 +73,7 @@ services:
         links:
             - telegraf
         ports:
-            - "8000:8000"
+            - "4843:4843"
         networks:
             - "iotstack"
 

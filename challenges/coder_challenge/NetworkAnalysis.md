@@ -24,7 +24,7 @@
     ```bash
     sudo nmap 192.168.88.0/24 -oG nmap_output
    
-    #somehow only sudo is shoing all hosts
+    #somehow only sudo is showing all hosts
     ```
    
    For our microfab we should then get the following output:
